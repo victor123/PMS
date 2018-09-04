@@ -1,0 +1,136 @@
+<div class="box notification-content marTop-20">
+        <!-- <h4>Pilot Default Grouping & Display Configuration </h4> -->
+        <form novalidate #myForm="ngForm">
+              <kendo-grid
+                  [data]="girdData"
+                  [pageSize]="gridState.take"
+                  [skip]="gridState.skip" 
+                  [sort]="gridState.sort"
+                  [pageable]="true"
+                  [scrollable]="'none'"
+                  (dataStateChange)="dataStateChange($event)"
+                  (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
+                  (save)="saveHandler($event)" (remove)="removeHandler($event)"
+                  (add)="addHandler($event)"
+                  class="table-responsive job_table"
+                >
+                <ng-template kendoGridToolbarTemplate>
+                    <button kendoGridAddCommand type="button">Add new</button>
+                    <button kendoButton (click)="deleteGroup()" type="button">Delete</button>
+                </ng-template>
+                <kendo-grid-column width="50">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                            <div>
+                                <input [checked]="checkNew" [(ngModel)]="dataItem.check" (change)="checkChange($event, dataItem)" kendoGridFocusable name="check" type="checkbox" />
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                <!-- <kendo-grid-column>
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                       {{dataItem.VesselStarting}}
+                    </ng-template>
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                            <input [(ngModel)]="dataItem.VesselStarting" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                          </ng-template>
+                </kendo-grid-column> -->
+                <kendo-grid-column field="autoDeployIndicator" title="Vessel Starting Alongside" width="100">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                                {{dataItem.LocationFrom}}
+                            </ng-template>
+                        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                                <input [(ngModel)]="dataItem.LocationFrom" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                            </ng-template>
+                    </kendo-grid-column>
+                <kendo-grid-column field="LocationFrom" title="Location From">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                                {{dataItem.LocationFrom}}
+                            </ng-template>
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.LocationFrom" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="requireJobLicense" title="Require Job License">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                                {{dataItem.requireJobLicense}}
+                            </ng-template>
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.requireJobLicense" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="confirmedServiceTime" editor="string" title="Confirmed Service Time ">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                                {{dataItem.confirmedServiceTime}}
+                            </ng-template>
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.confirmedServiceTime" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="confirmedServiceTime" editor="string" title="Confirmed Arrival Indicator/Follow-up movement Indicator">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                            {{dataItem.confirmedArrival}}
+                        </ng-template>
+                <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                    <input [(ngModel)]="dataItem.confirmedServiceTime" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="colourName" title="Vessel Name">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                                {{dataItem.vesselName}}
+                            </ng-template>
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.vesselName" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="locationTo" title="Location To">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                                {{dataItem.locationTo}}
+                            </ng-template>
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.locationTo" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="vesselEnding" title="Vessel Ending Alongside ">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                                {{dataItem.vesselEnding}}
+                            </ng-template>
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.vesselEnding" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                    </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="jobIndicator" title="Push Jod Indicator">
+                            <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                                    {{dataItem.jobIndicator}}
+                                </ng-template>
+                        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                            <input [(ngModel)]="dataItem.jobIndicator" kendoGridFocusable name="ProductName" class="k-textbox" required/>
+                        </ng-template>
+                        </kendo-grid-column>
+                
+                <kendo-grid-command-column title="Action" width="100">
+                    <ng-template kendoGridCellTemplate let-isNew="isNew">
+                      <button kendoGridEditCommand type="button" class="k-primary"><i class="fa fa-edit"></i></button>
+                      <button kendoGridRemoveCommand type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">
+                        <i *ngIf="!isNew" class="fa fa-paper-plane"></i>
+                        <i *ngIf="isNew" class="fa fa-paper-plane"></i>
+                        </button>
+                      <button kendoGridCancelCommand type="button">
+                        <i class="fa fa-times"></i>
+                      </button>
+                    </ng-template>
+                </kendo-grid-command-column>
+              </kendo-grid>
+          </form>
+          <kendo-dialog title="Alert" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+                <div style="width: 180px; margin: 30px auto;">
+                    <span style="float: left;"><i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i></span>
+                    <p style="padding-top: 10px; float: left;">Confirm Deletion</p>
+                </div>
+                
+                <kendo-dialog-actions>
+                    <button kendoButton (click)="close('no')">No</button>
+                    <button kendoButton (click)="close('yes')" primary="true">Yes</button>
+                </kendo-dialog-actions>
+            </kendo-dialog>
+            <div kendoDialogContainer></div>
+    </div>

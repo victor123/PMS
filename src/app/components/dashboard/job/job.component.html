@@ -1,0 +1,94 @@
+<div class="box box-border clearfix">
+  <div class="box-header with-border">
+    <h4 class="box-title">Pilot jobs based on Company / Vessel</h4>
+    <div class="box-tools pull-right"  >
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button>
+      <button type="button" class="btn btn-box-tool" routerLink= '/dashboard/'><i class="fa fa-times"></i></button>
+    </div>
+  </div>
+  <div class="box-body no-padding job-based-c-v">
+    <div class="job-based-c-v-search">
+      <form [formGroup]="filterForm" class="formgroup">
+        <div class="form-group">
+          <div class="radio">
+            <div>
+              <label>
+                <input type="radio" formControlName="type" 
+                [(ngModel)]="type" (click)="valChange(1)"
+                value=""> All </label>
+            </div>
+            <div>
+              <label>
+                <input type="radio" formControlName="type" 
+                [(ngModel)]="type" (click)="valChange(2)"
+                value="company"> Company </label>
+            </div>
+            <div>
+              <label>
+                <input type="radio" formControlName="type" 
+                [(ngModel)]="type" (click)="valChange(3)"
+                value="vessel"> Vessel </label>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          
+        </div> -->
+        <div class="form-group" style="width: 25%;">
+          <input type="text" formControlName="name" [ngClass]="{'notvalid':notvalid}" [(ngModel)]="filterForm['name']" (click)="onSearchChange($event)" class="form-control text_name" id="name" placeholder="{{message}}">
+          <div class="response" [ngClass]="{'notvalid':notvalid}">Please enter vaild {{message}}</div>
+           </div>
+        <div class="form-group">
+          <kendo-datepicker class="form-control" formControlName="fromDate" [(ngModel)]="fromDate" [format]="'dd-MM-yyyy'" [min]="min" [max]="max" (valueChange)="startChange()" placeholder="From Date"></kendo-datepicker>
+          
+        </div>
+        <div class="form-group" >
+          <kendo-datepicker class="form-control" formControlName="toDate" [(ngModel)]="toDate" [format]="'dd-MM-yyyy'" [min]="min1" [max]="max1" placeholder="To Date"></kendo-datepicker>
+          
+        </div>
+        <div class="form-group">
+          <button type="button" (click)="onFilter(filterForm.value)" class="btn btn-primary">Submit</button>
+          <button type="button" (click)="onReset()" class="btn btn-primary">Reset</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div class="job-based-c-v-search">
+      <div class="count_items text-right">
+        <span class="">{{totalCount}} items</span>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <kendo-grid class="table-responsive job_table" [data]="gridData" [pageSize]="pageSize" [skip]="state.skip" [sort]="state.sort"  [sortable]="{
+            allowUnsort: false }" [pageable]="{
+          buttonCount: buttonCount,
+          info: info,
+          type: types,
+          pageSizes: [5,10,15,20,25,50],
+          previousNext: previousNext
+        }" [scrollable]="'none'" (dataStateChange)="dataStateChange($event)" (pageChange)="pageChange($event)" (edit)="editHandler($event)">
+        <kendo-grid-column field="" title="S No">
+          <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex" >
+              <span class="serviceCategory">{{rowIndex + 1}}</span>
+            </ng-template>
+        </kendo-grid-column>
+      <kendo-grid-column field="vesselName" title="Vessel Name" [filterable]="false"> </kendo-grid-column>
+      <kendo-grid-column field="grossTonnage" title="Gross Tonnage" [filterable]="false"> </kendo-grid-column>
+      <kendo-grid-column field="vesselHeight" title="Vessel Height" [filterable]="false" > </kendo-grid-column>
+      <kendo-grid-column field="vesselDraft" title="Vessel Draft" [filterable]="false" > </kendo-grid-column>
+      <kendo-grid-column field="srt" title="SRT" filter="date" [filterable]="false" width="150"> </kendo-grid-column>
+      <kendo-grid-column field="cst" title="CST" [filterable]="false" width="150"> </kendo-grid-column>
+      <kendo-grid-column field="locationFrom" title="Location From" [filterable]="false"> </kendo-grid-column>
+      <kendo-grid-column field="locationTo" title="Location To" [filterable]="false"> </kendo-grid-column>
+      <kendo-grid-column field="status" title="Status" [filterable]="false"> </kendo-grid-column>
+      <kendo-grid-column field="orderNo" title="Order No" [filterable]="false"> </kendo-grid-column>
+      <kendo-grid-column field="company" title="Company" [filterable]="false" width="300"> </kendo-grid-column>
+      <kendo-grid-column title="Action" width="80">
+        <ng-template kendoGridCellTemplate>
+          <button kendoGridEditCommand><i class="fa fa-fw fa-eye"></i></button>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+    <kendo-psds-form [model]="editDataItem" [isNew]="isNew" (save)="saveHandler()" (cancel)="cancelHandler($event)"> </kendo-psds-form>
+  </div>
+</div>

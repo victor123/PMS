@@ -1,0 +1,52 @@
+<div class="box dashboard-content">
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="sidebar-toggle-btn"> <a href="Javascript:;" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span> </a> </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">DASHBOARD NAVIGATION</li>
+        <li><a routerLink= '/dashboard/pilotchart'><i class="fa fa-bar-chart"></i><span>Pilot Supply vs Job Demand Chart</span></a></li>
+        <li><a routerLink= '/dashboard/tugsupply'><i class="fa fa-bar-chart"></i><span>Tug Supply vs Job Demand Chart</span></a></li>
+        <li><a routerLink= '/dashboard/servicelevel'><i class="fa fa-ship"></i><span>Service Level Requirement</span></a></li>
+        <li><a routerLink= '/dashboard/piloteffective'><i class="fa fa-clock-o"></i><span>Pilot Effective Working Hour</span></a></li>
+        <li> <a href="Javascript:;"><i class="fa fa-bar-chart"></i><span>User Manual <br/> Adjustment</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu" style="top: 60px!important;">
+            <li><a routerLink= '/dashboard/usermanual'>Pilot</a></li>
+            <li><a routerLink= '/dashboard/tugeffective'>Tug</a></li>
+            <li><a href="Javascript:;">Logistics</a></li>
+          </ul>
+        </li>
+        <li> <a href="Javascript:;"><i class="fa fa-ship"></i><span>Jobs Based on Company/Vessel</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu" style="top: 60px!important;">
+            <li><a routerLink= '/dashboard/jobdetails'>Pilot</a></li>
+            <li><a routerLink= '/dashboard/tugdetails'>Tug</a></li>
+            <li><a href="Javascript:;">Logistics</a></li>
+          </ul>
+        </li>
+        <!-- <li><a routerLink= '/dashboard/jobdetails'><i class="fa fa-ship"></i><span>Pilot Jobs Based on Company/Vessel</span></a></li>
+        <li><a routerLink= '/dashboard/tugdetails'><i class="fa fa-ship"></i><span>Tug Jobs Based on Company/Vessel</span></a></li> -->
+        <li> <a href="Javascript:;"><i class="fa fa-envelope"></i><span>Send Message</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a href="Javascript:;">Pilot On-shift</a></li>
+            <li><a href="Javascript:;">Logistics Master On-Shift</a></li>
+            <li><a href="Javascript:;">Tug Master On-Shift</a></li>
+            <li><a href="Javascript:;">Pre-Defined Instruction to Pilot On-shift</a></li>
+            <li><a href="Javascript:;">Pre-Defined Instruction to Logistics Master</a></li>
+            <li><a href="Javascript:;">Pre-Defined Instruction to Tug Master</a></li>
+          </ul>
+        </li>
+        <li><a href="Javascript:;"><i class="fa fa-user"></i><span>Reprogram a Pilot Order</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <div class="dashboard-content-right">
+    <div id="content-ps-jd" class="col-md-6 col-xs-12"> </div>
+   <!--  <div class="box box-border clearfix"> -->
+        <router-outlet></router-outlet>
+    <!-- </div> -->
+  </div>
+</div>

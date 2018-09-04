@@ -1,0 +1,69 @@
+
+
+<kendo-dialog *ngIf="ujopen" [minWidth]="250" [width]="650">
+    <div class="modal-content blue_border">
+      <div class="modal-header popup_header">
+        <!-- icon header -->
+        <h4 class="modal-title">Create Unavailable Slot</h4>
+        <div class="popup_header_iconbx">
+          <button type="button" class="close rit_close_btn" data-dismiss="modal" (click)="close()">×</button>
+        </div>
+      </div>
+      <!-- icon header -->
+      <div class="popup_create_unavail_slot">
+        <!-- View Job Details -->
+        <div class="popup_create_slot">
+          <!-- Popup Job Details -->
+          <form [formGroup]="Pilotdata">
+          <div class="col-sm-5 col-md-6 col_del">
+            <div class="">
+              <label>Start Time</label>
+              <kendo-datepicker   formControlName="start"  [(value)]="Pilotdata.controls['start'].value" [(ngModel)]="Pilotdata.controls['start'].value" [format]="'dd-MM-yyyy HH:mm'"></kendo-datepicker>
+              <kendo-timepicker   formControlName="start" [(value)]="Pilotdata.controls['start'].value" [(ngModel)]="Pilotdata.controls['start'].value"  [format]="'HH:mm'" [steps]="{minute: 5}"></kendo-timepicker>
+            </div>
+            <div class="text_bx" [ngClass]="{'has-error':!Pilotdata.controls['baseCode'].valid && Pilotdata.controls['baseCode'].touched}">
+              <label>Unavailable Base</label>
+              <select name="status" class="form-control"   formControlName="baseCode">
+                  <option  value="">Select Base code</option>
+              <option *ngFor="let base of basedetails" [value]="base.baseCode">{{base.baseCode}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="!Pilotdata.controls['baseCode'].valid && Pilotdata.controls['baseCode'].touched">You must select Base.</div>
+            </div>
+           
+          </div>
+          <div class="col-sm-5 col-md-6 col_del">
+            <div class="">
+              <label>End Time </label>
+              <kendo-datepicker  formControlName="end" [(value)]="Pilotdata.controls['end'].value" [(ngModel)]="Pilotdata.controls['end'].value" [format]="'dd-MM-yyyy HH:mm'"></kendo-datepicker>
+              <kendo-timepicker   formControlName="end" [(value)]="Pilotdata.controls['end'].value" [(ngModel)]="Pilotdata.controls['end'].value" [format]="'HH:mm'" [steps]="{minute: 5}"></kendo-timepicker>
+            </div>
+            <div class="text_bx"  [ngClass]="{'has-error':!Pilotdata.controls['reasonCode'].valid && Pilotdata.controls['reasonCode'].touched}">
+              <label>Reason</label>
+              <select name="status" class="form-control"   formControlName="reasonCode">
+              <option  value="">Select Reason code</option>
+              <option *ngFor="let base of reasaonCode" [value]="base.reasaonCode">{{base.reasaonCode}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="!Pilotdata.controls['reasonCode'].valid && Pilotdata.controls['reasonCode'].touched">You must select Reason.</div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="text_bx_btm" [ngClass]="{'has-error':!Pilotdata.controls['remarksText'].valid && Pilotdata.controls['remarksText'].touched}">
+              <label>Remarks</label>
+              <textarea   formControlName="remarksText"  class="form-control" >Detailed reason for deleting unavailable slot</textarea>
+              <div class="alert alert-danger" *ngIf="!Pilotdata.controls['remarksText'].valid && Pilotdata.controls['remarksText'].touched">Please Enter Remarks.</div>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default save_btn rit_align" [disabled]="!Pilotdata.valid" (click)="saveunjobs()">Save</button>
+            <button type="button" class="btn btn-default cancel_btn lft_align" (click)="close()">Cancel</button>
+          </div>
+          </form>
+        </div>
+      
+        <!-- End Popup Job Details -->
+      </div>
+      <!-- End View Job Details -->
+    </div>
+  </kendo-dialog>
+  <alert-modal [(open)]="onprompt" [status]="status" [error]="errormessage" (close)="closealert()" ></alert-modal>

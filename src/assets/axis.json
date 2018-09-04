@@ -1,0 +1,7 @@
+[
+	{"status":"Deployed","codeList":["WL"]},
+	{"status":"Arrived","codeList":["WB","WC"]},
+	{"status":"Onboard","codeList":["WB","WC","WD","WM","WR","WT","WV","WW"]},
+	{"status":"Started","codeList":["WB","WC","WD","WM","WR","WT","WV","WW"]},
+	{"status":"Ended","codeList":["WB","WC"]}
+]

@@ -1,0 +1,82 @@
+<div class="box notification-content">
+  <form novalidate #myForm="ngForm">
+    <kendo-grid [data]="delay"
+    [pageSize]="state.take"
+    [skip]="state.skip" 
+    [sort]="state.sort"
+    [pageable]="true"
+    [scrollable]="'none'" 
+    (dataStateChange)="dataStateChange($event)"
+    (edit)="editHandler($event)"
+    (cancel)="cancelHandler($event)" (save)="saveHandler($event)" 
+    (remove)="removeHandler($event)" (add)="addHandler($event)" 
+    class="table-responsive job_table">
+      <ng-template kendoGridToolbarTemplate>
+        <button kendoGridAddCommand type="button">Add new</button>
+        <button kendoButton (click)="deleteDelayCode()" type="button">Delete</button>
+      </ng-template>
+      <kendo-grid-column width="50">
+        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+          <div>
+            <input [checked]="checkNew" [(ngModel)]="dataItem.check" (change)="checkChange($event, dataItem)" kendoGridFocusable name="check" type="checkbox" />
+          </div>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="serviceLevelCategoryCode" title="Service Level Category Code">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.serviceLevelCategoryCode" kendoGridFocusable name="serviceLevelCategoryCode" [disabled] ="editable" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="locationGroupCode" title="Location Group Code">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <kendo-dropdownlist 
+            [data]="listItems"
+            [(ngModel)]="dataItem.locationGroupCode" 
+            kendoGridFocusable 
+            name="locationGroupCode" required>
+          </kendo-dropdownlist>
+          <!-- <input [(ngModel)]="dataItem.locationGroupCode" kendoGridFocusable name="locationGroupCode" class="k-textbox" required/> -->
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="requiredServiceLevelNumber" title="Location Service Level">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.requiredServiceLevelNumber" kendoGridFocusable name="requiredServiceLevelNumber" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="delayThresholdQuantity" title="Delay Threshold">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.delayThresholdQuantity" kendoGridFocusable name="delayThresholdQuantity" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+     <!--  <kendo-grid-column field="sequenceNumber" title="Sequence Number">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.sequenceNumber" kendoGridFocusable name="sequenceNumber" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column> -->
+      <kendo-grid-command-column title="Action" width="100">
+        <ng-template kendoGridCellTemplate let-isNew="isNew">
+          <button kendoGridEditCommand type="button" class="k-primary"><i class="fa fa-edit"></i></button>
+          <button kendoGridRemoveCommand type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">
+            <i *ngIf="!isNew" class="fa fa-paper-plane"></i>
+            <i *ngIf="isNew" class="fa fa-paper-plane"></i>
+            </button>
+          <button kendoGridCancelCommand type="button">
+            <i class="fa fa-times"></i>
+          </button>
+        </ng-template>
+      </kendo-grid-command-column>
+    </kendo-grid>
+  </form>
+  <kendo-dialog title="Alert" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+    <div style="width: 180px; margin: 30px auto;">
+                <span style="float: left;"><i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i></span>
+                <p style="padding-top: 10px; float: left;">Confirm Deletion</p>
+            </div>
+    <kendo-dialog-actions>
+      <button kendoButton (click)="close('no')">No</button>
+      <button kendoButton (click)="close('yes')" primary="true">Yes</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+  <div kendoDialogContainer></div>
+</div>

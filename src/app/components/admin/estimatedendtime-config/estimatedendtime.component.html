@@ -1,0 +1,26 @@
+<div class="row timeReminder">
+  <div class="col-xs-12">
+    <div class="containerRem">
+      <h5>Schedule Estimated End Time Reminder</h5>
+      <form >
+        <kendo-timepicker 
+	        [format]="'HH:mm:ss'" 
+	        [value]="value" 
+	        [(ngModel)]="endtime" 
+	        placeholder="HH:mm:ss"
+	        name="endtime">
+        </kendo-timepicker>
+        <span class="timeSch">Before the job End time</span>
+        <div class="d-min">
+          <input type="checkbox" name="check" [(ngModel)]="defaultCheck" 
+          (click)="defaultCheckchange($event)">
+          <label>Set to Default 30 minutes</label>
+        </div>
+        <div class="button-section">
+          <button kendoButton (click)="resettime()" class="pull-left" type="button">Cancel</button>
+          <button kendoButton (click)="savetime($event, endtime)" class="pull-right" type="button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

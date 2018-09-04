@@ -1,0 +1,153 @@
+<div class="box notification-content">
+  <div class="col-md-2">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">Categories</h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <ul class="nav nav-stacked">
+          <li [class.active]="viewMode == 'all'">
+            <a class="filter-button" >
+              <input type="checkbox" value="All" [(ngModel)]="allChecked" (change)="check($event)" name="psds" />
+              <i class="fa fa-bell"></i> All <span class="label label-success pull-right">{{allCount}}</span></a>
+          </li>
+         <!--  <li [class.active]="viewMode == 'all'">
+            <a class="filter-button" >
+              <input type="checkbox" name="all" />
+                <i class="fa fa-bell"></i>{{moduleCode.name}}<span class="label label-success pull-right"
+              [ngClass]="{'label-success': moduleCode.name == 'All', 'label-danger': moduleCode.name == 'PSDS', 'label-info': moduleCode.name == 'TSDS', 'label-warning': moduleCode.name == 'LSDS'}">{{allCount}}</span></a>
+          </li> -->
+          <li [class.active]="viewMode == 'psds'">
+            <a class="filter-button" >
+              <input type="checkbox" value="PSDS" (change)="check($event)" name="psds" />
+              <i class="fa fa-user"></i> PSDS <span class="label label-danger pull-right">{{psdsCount}}</span></a>
+          </li>
+          <li [class.active]="viewMode == 'tsds'">
+            <a class="filter-button" >
+              <input type="checkbox" value="TSDS" (change)="check($event)" name="tsds" />
+              <i class="fa fa-ship"></i> TSDS <span class="label label-info pull-right">{{tsdsCount}}</span></a>
+          </li>
+          <li [class.active]="viewMode == 'lsds'">
+            <a class="filter-button" >
+              <input type="checkbox" value="LSDS" (change)="check($event)" name="lsds" />
+              <i class="fa fa-car"></i> LSDS <span class="label label-warning pull-right">{{lsdsCount}}</span></a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+  <div class="col-md-10">
+    <div class="box box-border clearfix">
+      <div class="box-header with-border">
+        <!-- <h4 class="box-title">System Notification</h4> -->
+        <div class="box-tools pull-right">
+         <!--  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button> -->
+          <button type="button" class="btn btn-box-tool" routerLink='/dashboard/'><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Notifications</h3>
+          <div class="box-tools pull-right">
+            <div class="has-feedback">
+              <input type="text" [(ngModel)]="searchText"  class="form-control input-sm" placeholder="Search">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <!-- <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button> -->
+            <div class="btn btn-default btn-sm checkbox-toggle">
+              <input type="checkbox" name="selectAll" [(ngModel)]="isChecked" (change)="checkAll($event, p)" />
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm" (click)="onDelete()"><i class="fa fa-trash-o"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <button type="button" class="btn btn-default btn-sm" (click)="onRefresh()"><i class="fa fa-refresh"></i></button>
+            <div class="pull-right">
+              {{p}}-{{total | division: 10 | number: '1.0-0'}}/{{total}}
+              <div class="btn-group">
+                <!--  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+              <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button> -->
+                <pagination-controls (pageChange)="pageChanged($event); p = $event;" maxSize="0" directionLinks="true" autoHide="false" previousLabel="" nextLabel="" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="p" screenReaderCurrentLabel="You're on page"></pagination-controls>
+              </div>
+              <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+          </div>
+          <div class="table-responsive mailbox-messages">
+            <!-- /.table -->
+            <div [ngSwitch]="viewMode">
+              <div *ngSwitchCase="'all'" class="tab_sec" [@fadeInOut]>
+                <!-- <app-user> </app-user>  -->
+                <table class="table table-hover table-striped">
+                  <tbody>
+                    <tr class="filter" *ngFor="let m of datas | filterBy: searchText |
+                    paginate:{
+                    itemsPerPage:10, 
+                    currentPage:p,
+                    totalItems:total
+                    }  ; let i = index">
+                      <td>
+                        <input type="checkbox" value="{{m.notificationId}}" 
+                        (change)="isAllChecked($event,m)" [(ngModel)]="m.state">
+                      </td>
+                      <td class="mailbox-name"><a href="Javascript:;" (click)="editHandler(m)">{{m.notificationTypeCode}}</a></td>
+                      <td class="mailbox-subject">{{m.moduleCode}}</td>
+                      <td class="mailbox-attachment"><small [ngClass]="{'label-danger': m.moduleCode == 'PSDS', 'label-info': m.moduleCode == 'TSDS', 'label-warning': m.moduleCode ==  'LSDS'}" class="label">{{m.moduleCode}}</small></td>
+                      <td class="mailbox-date">{{m.notificationDate | DateFormatPipe }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /.table -->
+              </div>
+            </div>
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <!-- <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+            </button> -->
+            <div class="btn btn-default btn-sm checkbox-toggle">
+              <input type="checkbox" name="selectAll" [(ngModel)]="isChecked" (change)="checkAll($event, p)" />
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <button type="button" class="btn btn-default btn-sm" (click)="onRefresh()"><i class="fa fa-refresh"></i></button>
+            <div class="pull-right">
+              {{p}}-{{total | division: 10 | number: '1.0-0'}}/{{total}}
+              <div class="btn-group">
+                <!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+              <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button> -->
+                <pagination-controls (pageChange)="pageChanged($event);p = $event" maxSize="0" directionLinks="true" autoHide="false" previousLabel="" nextLabel="" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="p" screenReaderCurrentLabel="You're on page"></pagination-controls>
+              </div>
+              <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+      <kendo-psds-form [model]="editDataItem" [isNew]="isNew" (cancel)="cancelHandler($event)"> </kendo-psds-form>
+      <kendo-tsds-form  [model]="tsdsModel" [isPsds]="isPsds" (cancel)="cancelHandler($event)"></kendo-tsds-form>
+    </div>
+  </div>
+  <!-- /.col -->
+</div>

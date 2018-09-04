@@ -1,0 +1,46 @@
+<kendo-dialog *ngIf="open" [minWidth]="250">
+  <form [formGroup]="Form">
+    <div class="modal-content blue_border">
+      <div class="modal-header popup_header">
+        <h4 class="modal-title">Create Pilot Relief Job</h4>
+      </div>
+      <div class="popup_pilot_timeline">
+        <div class="col-12 col-md-12">
+
+          <div class="form-group text_bx" [ngClass]="{'has-error':!Form.controls['reliefLocation'].valid && Form.controls['reliefLocation'].touched}">
+            <span>Relief Location </span>
+            <input type="text" class="form-control" formControlName="reliefLocation" id="inputEmail" placeholder="Relief Location">
+
+            <div class="alert alert-danger" *ngIf="!Form.controls['reliefLocation'].valid && Form.controls['reliefLocation'].touched">
+              Please Select Relief Location</div>
+          </div>
+          <div class="form-group text_bx" [ngClass]="{'has-error':!Form.controls['reliefJobRemarks'].valid && Form.controls['reliefJobRemarks'].touched}">
+            <span>Relief Job Remarks</span>
+            <textarea rows="4" cols="50" class="form-control" formControlName="reliefJobRemarks">
+
+            </textarea>
+            {{Form.controls['reliefJobRemarks'].value.length}} /150
+            <div class="alert alert-danger" *ngIf="!Form.controls['reliefJobRemarks'].valid && Form.controls['reliefJobRemarks'].touched">
+              Please enter Relief Job Remarks.</div>
+          </div>
+
+          <div class="form-group text_bx">
+            <span>Relief Time</span>
+            
+            <kendo-datepicker class="form-date" formControlName="reliefTime" [(value)]="Form.controls['reliefTime'].value" [(ngModel)]="Form.controls['reliefTime'].value" [format]="'dd-MM-yyyy HH:mm'" [min]="min" [max]="max" [disabled]="false"
+              placeholder="Planned Start Time"></kendo-datepicker>
+            <kendo-timepicker  formControlName="reliefTime" [(value)]="Form.controls['reliefTime'].value" [(ngModel)]="Form.controls['reliefTime'].value" [disabled]="false" [min]="min" [steps]="{minute: 5}" [max]="max"></kendo-timepicker>
+
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default save_btn rit_align" [disabled]="!Form.valid" (click)="onSave(Form.value)">Save</button>
+      <button type="button" class="btn btn-default cancel_btn lft_align" (click)="closemodal()">Cancel</button>
+    </div>
+  </form>
+</kendo-dialog>
+<alert-modal [(open)]="onprompt" [status]="status" [error]="errormessage" (close)="closealert()" ></alert-modal>

@@ -1,0 +1,70 @@
+<div class="box notification-content">
+  <!-- <h4 class="box-title">Hard & Soft constraints</h4> -->
+  <div class="box-body no-padding">
+    <form #myform = "ngForm" novalidate>
+      <div class="table-responsive mailbox-messages">
+        <table class="table table-hover table-striped constraints">
+          <thead>
+            <tr>
+              <th class="th_commonWidth">Hard Constraint Validation Check</th>
+              <th>Engine Validation</th>
+              <th>System Validation</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of hardData; let i = index">
+              <td>{{m.constraintDescription}}</td>
+              <td>
+                <div>
+                  <kendo-switch (click)="onChangeCheck($event, m)" [(ngModel)]="m.engineValidation"
+                  name="engineValidation-{{i}}"></kendo-switch>
+                </div>
+              </td>
+              <td>
+                <!-- <div *ngIf="m.isView"> -->
+                <div>
+                  <kendo-switch (click)="onChangeChecks($event, m)" [(ngModel)]="m.systemValidation" 
+                  name="systemValidation-{{i}}"></kendo-switch>
+                </div>
+              </td>
+              <td>{{m.remark}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-responsive mailbox-messages">
+        <table class="table table-hover table-striped constraints">
+          <thead>
+            <tr>
+              <th class="th_commonWidth">Soft Constraint Validation Check</th>
+              <th>Engine Validation</th>
+              <th>System Validation</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of softData; let i = index" >
+              <td>{{m.constraintDescription}}</td>
+              <td>
+                <div>
+                  <kendo-switch (click)="onChangeCheck($event, m)" [(ngModel)]="m.engineValidation" 
+                  name="engineValidation-a{{i}}"></kendo-switch>
+                </div>
+              </td>
+              <td>
+                <!-- <div *ngIf="m.isView"> -->
+                <div>
+                  <kendo-switch (click)="onChangeChecks($event, m)" [(ngModel)]="m.systemValidation"
+                  name="systemValidation-a{{i}}"></kendo-switch>
+                </div>
+              </td>
+              <td>{{m.remark}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+    <div kendoDialogContainer></div>
+  </div>
+</div>

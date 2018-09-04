@@ -1,0 +1,116 @@
+<div class="box notification-content">
+  <form novalidate #myForm="ngForm">
+    <kendo-grid [data]="delay"
+    [pageSize]="state.take"
+    [skip]="state.skip" 
+    [sort]="state.sort"
+    [pageable]="true"
+    [scrollable]="'none'" 
+    (dataStateChange)="dataStateChange($event)"
+    (edit)="editHandler($event)"
+    (cancel)="cancelHandler($event)" (save)="saveHandler($event)" 
+    (remove)="removeHandler($event)" (add)="addHandler($event)" 
+    class="table-responsive job_table">
+      <ng-template kendoGridToolbarTemplate>
+        <button kendoGridAddCommand type="button">Add new</button>
+        <button kendoButton (click)="deleteDelayCode()" type="button">Delete</button>
+      </ng-template>
+      <kendo-grid-column width="50">
+        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+          <div>
+            <input [checked]="checkNew" [(ngModel)]="dataItem.check" (change)="checkChange($event, dataItem)" kendoGridFocusable name="check" type="checkbox" />
+          </div>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="priorityCode" title="Priority Code">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.priorityCode" pattern= "[0-9].{0,}" kendoGridFocusable name="priorityCode" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="categoryName" title="Priority Category">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.categoryName" kendoGridFocusable name="categoryName" class="k-textbox" [disabled]="editable" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="vesselTypeCode" title="Vessel Type">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.vesselTypeCode" kendoGridFocusable name="vesselTypeCode" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="vesselGrtLbQuantity" title="Vessel GT Lower Bound">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.vesselGrtLbQuantity" pattern= "[0-9].{0,}" kendoGridFocusable name="vesselGrtLbQuantity" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="vesselGrtUbQuantity" title="Vessel GT Upper Bound">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.vesselGrtUbQuantity" pattern= "[0-9].{0,}" kendoGridFocusable name="vesselGrtUbQuantity" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="vesselLoaLbQuantity" title="Vessel LOA Lower Bound">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.vesselLoaLbQuantity" pattern= "[0-9].{0,}" kendoGridFocusable name="vesselLoaLbQuantity" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="vesselLoaUbQuantity" title="Vessel LOA Higher Bound">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.vesselLoaUbQuantity" pattern= "[0-9].{0,}" kendoGridFocusable name="vesselLoaUbQuantity" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="vesselDraftLbQuantity" title="Vessel Draft Lower Bound">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.vesselDraftLbQuantity" pattern= "[0-9].{0,}" kendoGridFocusable name="vesselDraftLbQuantity" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="vesselDraftUbQuantity" title="Vessel Draft Higher Bound">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.vesselDraftUbQuantity" pattern= "[0-9].{0,}" kendoGridFocusable name="vesselDraftUbQuantity" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="locationFromGroupCode" title="Location From Group">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.locationFromGroupCode" kendoGridFocusable name="locationFromGroupCode" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="locationToGroupCode" title="Location To Group">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.locationToGroupCode" kendoGridFocusable name="locationToGroupCode" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="mosJobTypeCode" title="Order Job Type">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.mosJobTypeCode" kendoGridFocusable name="mosJobTypeCode" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="sourcePartyCode" title="Order Source">
+        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+          <input [(ngModel)]="dataItem.sourcePartyCode" kendoGridFocusable name="sourcePartyCode" class="k-textbox" required/>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-command-column title="Action" width="100">
+        <ng-template kendoGridCellTemplate let-isNew="isNew">
+          <button kendoGridEditCommand type="button" class="k-primary"><i class="fa fa-edit"></i></button>
+          <button kendoGridRemoveCommand type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">
+            <i *ngIf="!isNew" class="fa fa-paper-plane"></i>
+            <i *ngIf="isNew" class="fa fa-paper-plane"></i>
+            </button>
+          <button kendoGridCancelCommand type="button">
+            <i class="fa fa-times"></i>
+          </button>
+        </ng-template>
+      </kendo-grid-command-column>
+    </kendo-grid>
+  </form>
+  <kendo-dialog title="Alert" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+    <div style="width: 180px; margin: 30px auto;">
+                <span style="float: left;"><i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i></span>
+                <p style="padding-top: 10px; float: left;">Confirm Deletion</p>
+            </div>
+    <kendo-dialog-actions>
+      <button kendoButton (click)="close('no')">No</button>
+      <button kendoButton (click)="close('yes')" primary="true">Yes</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+  <div kendoDialogContainer></div>
+</div>

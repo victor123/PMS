@@ -1,0 +1,130 @@
+<div class="col-lg-12 col-xs-12" style="padding:0">
+  <div class="dashboard-box-small">
+    <a routerLink='/psds'>
+      <div class="overlay"><img src="assets/img/small-box-overlay.png" alt="Overlay Image"></div>
+      <!-- small box -->
+      <div class="small-box bg-aqua gbox1">
+        <div class="inner">
+          <h4>PSDS</h4>
+          <p>Pilot Scheduling & Deployment System</p>
+        </div>
+        <div class="icon"> <i class="fa fa-user"></i> </div>
+      </div>
+    </a>
+  </div>
+  <!-- ./col -->
+  <div class="dashboard-box-small">
+    <a href="#" target="_blank">
+      <div class="overlay"><img src="assets/img/small-box-overlay.png" alt="Overlay Image"></div>
+      <!-- small box -->
+      <div class="small-box bg-green gbox2">
+        <div class="inner">
+          <h4>TSDS</h4>
+          <p>Tug Scheduling & Deployment System</p>
+        </div>
+        <div class="icon"> <i class="fa fa-ship"></i> </div>
+      </div>
+    </a>
+  </div>
+  <!-- ./col -->
+  <div class="dashboard-box-small">
+    <a href="#" target="_blank">
+      <div class="overlay"><img src="assets/img/small-box-overlay.png" alt="Overlay Image"></div>
+      <!-- small box -->
+      <div class="small-box bg-yellow gbox3">
+        <div class="inner">
+          <h4>LSDS</h4>
+          <p>Logistics Scheduling & Deployment System</p>
+        </div>
+        <div class="icon"> <i class="fa fa-car"></i> </div>
+      </div>
+    </a>
+  </div>
+  <!-- ./col -->
+  <div class="dashboard-box-small reports-box">
+    <a href="rep#" target="_blank">
+      <div class="overlay"><img src="assets/img/small-box-overlay.png" alt="Overlay Image"></div>
+      <!-- small box -->
+      <div class="small-box bg-red gbox4">
+        <div class="inner">
+          <h4>Reports</h4>
+        </div>
+        <div class="icon"> <i class="fa fa-bar-chart"></i> </div>
+      </div>
+    </a>
+  </div>
+  <!-- ./col -->
+  <div class="dashboard-box-small sys-notification">
+    <!-- small box -->
+    <a href="Javascript:;" class="dropdown-toggle" (click)="openModal(template)">
+      <div class="small-box bg-red gbox5">
+        <div class="inner"> <span class="label">{{count}}</span>
+          <h4>System Notification</h4>
+        </div>
+        <div class="icon"> <i class="fa fa-bell"></i> </div>
+      </div>
+      <div class="overlay"><img src="assets/img/small-box-overlay.png" alt="Overlay Image"></div>
+    </a>
+  </div>
+  <!-- ./col -->
+</div>
+<!-- Motel Template -->
+<ng-template #template>
+  <div id="sys-not-modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" (click)="modalRef.hide()">&times;</button>
+        <tabset class="tab_content">
+          <tab>
+            <ng-template tabHeading>
+              <button class="btn btn-default filter-button" (click)="onclick('all')" data-filter="all">All</button>
+            </ng-template>
+            <div *ngFor="let m of datas" class="s-noti-content filter psds">
+              <a href="Javascript:;" (click)="editHandler(m)" ><span>{{m.notificationTypeCode}}</span>
+                            <p>{{m.moduleCode}}</p>
+                            <small [ngClass]="{'label-danger': m.moduleCode == 'PSDS', 'label-info': m.moduleCode == 'TSDS', 'label-warning': m.moduleCode == 'LSDS'}" class="label" class="label">{{m.moduleCode}}</small></a>
+            </div>
+          </tab>
+          <tab>
+            <ng-template tabHeading>
+              <button class="btn btn-default filter-button" (click)="onclick('PSDS')" data-filter="psds">PSDS</button>
+            </ng-template>
+            <div *ngFor="let m of datas" class="s-noti-content filter psds">
+              <a href="Javascript:;" (click)="editHandler(m)"><span>{{m.notificationTypeCode}}</span>
+                            <p>{{m.moduleCode}}</p>
+                            <small [ngClass]="{'label-danger': m.moduleCode == 'PSDS', 'label-info': m.moduleCode == 'TSDS', 'label-warning': m.moduleCode == 'LSDS'}" class="label" class="label">{{m.moduleCode}}</small></a>
+            </div>
+          </tab>
+          <tab>
+            <ng-template tabHeading>
+              <button class="btn btn-default filter-button" (click)="onclick('TSDS')" data-filter="tsds">TSDS</button>
+            </ng-template>
+            <div *ngFor="let m of datas" class="s-noti-content filter tsds">
+              <a href="Javascript:;" (click)="editHandler(m)" ><span>{{m.notificationTypeCode}}</span>
+                            <p>{{m.moduleCode}}</p>
+                            <small [ngClass]="{'label-danger': m.moduleCode == 'PSDS', 'label-info': m.moduleCode == 'TSDS', 'label-warning': m.moduleCode == 'LSDS'}" class="label" class="label">{{m.moduleCode}}</small></a>
+            </div>
+          </tab>
+          <tab>
+            <ng-template tabHeading>
+              <button class="btn btn-default filter-button" (click)="onclick('LSDS')" data-filter="lsds">LSDS</button>
+            </ng-template>
+            <div *ngFor="let m of datas" class="s-noti-content filter lsds">
+              <a href="Javascript:;" (click)="editHandler(m)" ><span>{{m.notificationTypeCode}}</span>
+                            <p>{{m.moduleCode}}</p>
+                            <small [ngClass]="{'label-danger': m.moduleCode == 'PSDS', 'label-info': m.moduleCode == 'TSDS', 'label-warning': m.moduleCode == 'LSDS'}" class="label" class="label">{{m.moduleCode}}</small></a>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grey pull-left" (click)="modalRef.hide()">Close</button>
+        <a routerLink= '/notification' (click)="modalRef.hide()" class="btn btn-primary pull-right">View All</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- <button (click)="editHandler()" ></button> -->
+<!-- Model Template Ends -->
+<kendo-psds-form [model]="editDataItem" [isNew]="isNew" (cancel)="cancelHandler($event)"> </kendo-psds-form>
+<kendo-tsds-form  [model]="tsdsModel" [isPsds]="isPsds" (cancel)="cancelHandler($event)"></kendo-tsds-form>

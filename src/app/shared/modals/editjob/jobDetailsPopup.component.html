@@ -1,0 +1,285 @@
+<kendo-dialog class="job-view-form" *ngIf="isNew" (close)="closeForm()">
+  <kendo-dialog-titlebar class="popup_header">
+    <h4>Job Details</h4>
+    <button class="btn btn-default save_btn rit_align edit right" (click)="editforms()"> Edit </button>
+  </kendo-dialog-titlebar>
+  <form [formGroup]="editForm" class="showdate">
+    <div class="popup_view_job_details">
+      <div class="popup_job_details">
+        <h4>Job Information</h4>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div>
+              <span>Order Number</span>
+              {{editForm.controls['orderNumber'].value}}</div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Job Type</span>
+              {{editForm.controls['jobType'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx" [ngClass]="{'has-error':!editForm.controls['priorityCategoryName'].valid && editForm.controls['priorityCategoryName'].touched}">
+            <div>
+              <span>Priority Code</span>
+              <select name="status" class="form-control" formControlName="priorityCategoryName">
+                <option *ngFor="let priority of priorityCodes" [value]="priority.priorityCode">{{priority.priorityId}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div>
+              <span>Service Request Time</span>
+              {{editForm.controls['srt'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Confirmed Service Time</span>
+              {{editForm.controls['cst'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx" [ngClass]="{'has-error':!editForm.controls['efficativeCST'].valid && editForm.controls['efficativeCST'].touched}">
+            <div>
+              <span>Effective CST</span>
+              <div *ngIf="editForm.controls['efficativeCST'].value!==undefind; else templateName">
+                <kendo-datepicker class="form-date" formControlName="efficativeCST" [(value)]="efficativeCST" [max]="CstMin"
+                  [format]="'dd-MM-yyyy HH:mm'" placeholder="Effective CST Date"></kendo-datepicker>
+                <kendo-timepicker [steps]="{minute: 5}" [(value)]="efficativeCST" [max]="CstMin" formControlName="efficativeCST" placeholder="Effective CST Time"></kendo-timepicker>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div>
+              <span>Planned Start Time</span>
+              <div *ngIf="editForm.controls['start'].value!==undefined; else templateName">
+                {{editForm.controls['start'].value}}</div>
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Planned End Time</span>
+              <div *ngIf="editForm.controls['end'].value!==undefined; else templateName">
+                {{editForm.controls['end'].value}}
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group text_bx" style="width: 64%;">
+            <div>
+              <span>Company Agent</span>
+              {{editForm.controls['agentContactName'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Agent Contact Details</span>
+              {{editForm.controls['agentContactNumber'].value}}
+              <!-- <textarea type="text" style="width: 100%;resize: none;" class="k-textbox"   [(value)]="reliefTime"  [(ngModel)]="reliefTime"  [value]="contDetail" [readonly]="true"></textarea> -->
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Location From</span>
+              {{editForm.controls['locationFromCode'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx" [ngClass]="{'has-error':!editForm.controls['locationToCode'].valid && editForm.controls['locationToCode'].touched}">
+            <div>
+              <span>Location To</span>
+              <select name="status" class="form-control" formControlName="locationToCode">
+                <option *ngFor="let base of basedetails" [value]="base.baseCode">{{base.baseCode}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup_job_details">
+        <h4>Job Operation Details</h4>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div>
+              <span>Status</span>
+              {{editForm.controls['jobsat'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Pilot Code</span>
+              {{editForm.controls['pilotCode'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Pilot License</span>
+              {{editForm.controls['piloTLicenceCode'].value}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div>
+              <span>Deployed Time</span>
+              <div *ngIf="editForm.controls['deployDate'].value!; else templateName">
+                <kendo-datepicker [max]="min" class="form-date" [ngClass]="{'has-error':!editForm.controls['deployDate'].errors.arriveDate && !editForm.controls['deployDate'].errors.onBoardDate && editForm.controls['deployDate'].errors.startDateTime && !editForm.controls['deployDate'].touched}"
+                  formControlName="deployDate" [(value)]="deployDate" placeholder="Deployed Time" [format]="'dd-MM-yyyy HH:mm'"></kendo-datepicker>
+                <kendo-timepicker [max]="min" [steps]="{minute: 5}" [ngClass]="{'has-error':!editForm.controls['deployDate'].errors.arriveDate && !editForm.controls['deployDate'].errors.onBoardDate && !editForm.controls['deployDate'].errors.startDateTime && !editForm.controls['deployDate'].touched}"
+                  formControlName="deployDate" [(value)]="deployDate"></kendo-timepicker>
+              </div>
+              <div class="alert alert-danger" *ngIf="!editForm.controls['deployDate'].errors.arriveDate && editForm.controls['deployDate'].touched">
+                {{editForm.controls['deployDate'].value}} is greater than Arrive Date {{editForm.controls['deployDate'].value}}</div>
+              <div class="alert alert-danger" *ngIf="!editForm.controls['deployDate'].errors.onBoardDate && editForm.controls['deployDate'].touched">
+                {{editForm.controls['deployDate'].value}} is greater than OnBoard Date {{editForm.controls['onBoardDate'].value}}</div>
+              <div class="alert alert-danger" *ngIf="!editForm.controls['deployDate'].errors.startDateTime && editForm.controls['deployDate'].touched">
+                {{editForm.controls['deployDate'].value}} is greater than Start Date {{editForm.controls['startDateTime'].value}}</div>
+            </div>
+          </div>
+          <div class="form-group text_bx" [ngClass]="{'has-error':!editForm.controls['arriveDate'].errors.endDateTime && !editForm.controls['arriveDate'].errors.onBoardDate && editForm.controls['arriveDate'].errors.startDateTime && !editForm.controls['arriveDate'].touched}">
+            <div>
+              <span>Arrived Time</span>
+              <div *ngIf="editForm.controls['arriveDate'].value!; else templateName">
+                <kendo-datepicker class="form-date" [max]="min" formControlName="arriveDate" [(value)]="arriveDate" [format]="'dd-MM-yyyy HH:mm'" placeholder="Arrived Time"></kendo-datepicker>
+                <kendo-timepicker [steps]="{minute: 5}" [max]="min" formControlName="arriveDate" [(value)]="arriveDate" [format]="'dd-MM-yyyy HH:mm'"></kendo-timepicker>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['arriveDate'].errors.endDateTime && editForm.controls['arriveDate'].touched">
+                  {{editForm.controls['arriveDate'].value}} is greater than Arrive Date {{editForm.controls['endDateTime'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['arriveDate'].errors.onBoardDate && editForm.controls['arriveDate'].touched">
+                  {{editForm.controls['arriveDate'].value}} is greater than OnBoard Date {{editForm.controls['onBoardDate'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['arriveDate'].errors.startDateTime && editForm.controls['arriveDate'].touched">
+                  {{editForm.controls['arriveDate'].value}} is greater than Start Date {{editForm.controls['startDateTime'].value}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group text_bx" [ngClass]="{'has-error':!editForm.controls['onBoardDate'].errors.arriveDate && !editForm.controls['onBoardDate'].errors.endDateTime && !editForm.controls['onBoardDate'].errors.deployDate && editForm.controls['onBoardDate'].errors.startDateTime && !editForm.controls['onBoardDate'].touched}">
+            <div>
+              <span>Onboard Time</span>
+
+              <div *ngIf="editForm.controls['onBoardDate'].value!; else templateName">
+                <kendo-datepicker class="form-date" formControlName="onBoardDate" [(value)]="onBoardDate" [format]="'dd-MM-yyyy HH:mm'" [max]="min" placeholder="Onboard Time"></kendo-datepicker>
+                <kendo-timepicker [max]="min" [steps]="{minute: 5}" formControlName="onBoardDate" [(value)]="onBoardDate"></kendo-timepicker>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['onBoardDate'].errors.arriveDate && editForm.controls['onBoardDate'].touched">
+                  {{editForm.controls['onBoardDate'].value}} is greater than Arrive Date {{editForm.controls['arriveDate'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['onBoardDate'].errors.endDateTime && editForm.controls['onBoardDate'].touched">
+                  {{editForm.controls['onBoardDate'].value}} is greater than Arrive Date {{editForm.controls['endDateTime'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['onBoardDate'].errors.deployDate && editForm.controls['onBoardDate'].touched">
+                  {{editForm.controls['onBoardDate'].value}} is greater than OnBoard Date {{editForm.controls['onBoardDate'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['onBoardDate'].errors.startDateTime && editForm.controls['onBoardDate'].touched">
+                  {{editForm.controls['onBoardDate'].value}} is greater than Start Date {{editForm.controls['startDateTime'].value}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx" [ngClass]="{'has-error':!editForm.controls['startDateTime'].errors.arriveDate && !editForm.controls['startDateTime'].errors.onBoardDate && editForm.controls['startDateTime'].errors.endDateTime && !editForm.controls['startDateTime'].touched}">
+            <div>
+              <span>Start Time</span>
+              <div *ngIf="editForm.controls['startDateTime'].value!; else templateName">
+                <kendo-datepicker class="form-date" [max]="min" formControlName="startDateTime" [(value)]="startDateTime" [format]="'dd-MM-yyyy HH:mm'"
+                  placeholder="Start Time"></kendo-datepicker>
+                <kendo-timepicker [steps]="{minute: 5}" [max]="min" formControlName="startDateTime" [(value)]="startDateTime"></kendo-timepicker>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['startDateTime'].errors.arriveDate && editForm.controls['startDateTime'].touched">
+                  {{editForm.controls['startDateTime'].value}} is greater than Arrive Date {{editForm.controls['startDateTime'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['startDateTime'].errors.onBoardDate && editForm.controls['startDateTime'].touched">
+                  {{editForm.controls['startDateTime'].value}} is greater than OnBoard Date {{editForm.controls['onBoardDate'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['startDateTime'].errors.endDateTime && editForm.controls['startDateTime'].touched">
+                  {{editForm.controls['startDateTime'].value}} is greater than Start Date {{editForm.controls['endDateTime'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['startDateTime'].errors.deployDate && editForm.controls['startDateTime'].touched">
+                  {{editForm.controls['startDateTime'].value}} is greater than Start Date {{editForm.controls['deployDate'].value}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group text_bx" [ngClass]="{'has-error':!editForm.controls['endDateTime'].errors.arriveDate && !editForm.controls['endDateTime'].errors.onBoardDate && editForm.controls['endDateTime'].errors.startDateTime && !editForm.controls['endDateTime'].touched && editForm.controls['endDateTime'].errors.deployDate} ">
+            <div>
+              <span>End Time</span>
+              <div *ngIf="editForm.controls['endDateTime'].value!; else templateName">
+                <kendo-datepicker class="form-date" formControlName="endDateTime" [(value)]="endDateTime" [format]="'dd-MM-yyyy HH:mm'" placeholder="End Time"[max]="min" ></kendo-datepicker>
+                <kendo-timepicker [steps]="{minute: 5}" [max]="min" formControlName="endDateTime" [(value)]="endDateTime" [format]="'dd-MM-yyyy'"></kendo-timepicker>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['endDateTime'].errors.arriveDate && editForm.controls['endDateTime'].touched">
+                  {{editForm.controls['endDateTime'].value}} is greater than Arrive Date {{editForm.controls['endDateTime'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['endDateTime'].errors.onBoardDate && editForm.controls['endDateTime'].touched">
+                  {{editForm.controls['endDateTime'].value}} is greater than OnBoard Date {{editForm.controls['onBoardDate'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['endDateTime'].errors.startDateTime && editForm.controls['endDateTime'].touched">
+                  {{editForm.controls['endDateTime'].value}} is greater than Start Date {{editForm.controls['startDateTime'].value}}</div>
+                <div class="alert alert-danger" *ngIf="!editForm.controls['endDateTime'].errors.deployDate && editForm.controls['endDateTime'].touched">
+                  {{editForm.controls['endDateTime'].value}} is greater than Start Date {{editForm.controls['deployDate'].value}}</div>
+              </div>
+            </div>
+          </div>
+          <!-- { onBoardDate:true, arriveDate:true,startDateTime:true,deployDate:true }; -->
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx col-md-12">
+            <div>
+              <span>Remarks</span>
+              {{editForm.controls['remarks'].value}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup_job_details">
+        <h4>Vessel Information</h4>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div>
+              <span>Vessel ID</span>
+              {{editForm.controls['vesselId'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Name</span>
+              {{editForm.controls['vesselName'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Type</span>
+              {{editForm.controls['jobType'].value}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx" [ngClass]="{'has-error':!editForm.controls['height'].valid && editForm.controls['height'].touched}">
+            <div>
+              <span>Height</span>
+              <div *ngIf="editForm.controls['jobStatus'].value=='5' || editForm.controls['jobStatus'].value=='6' ||editForm.controls['jobStatus'].value=='7'; else templateName">
+              <input type="text" class="k-textbox" formControlName="height" maxlength="999"/> 
+            </div>
+              </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Draft</span>
+              {{editForm.controls['vesselDraft'].value}}
+            </div>
+          </div>
+          <div class="form-group text_bx">
+            <div>
+              <span>Gross Tonnage</span>
+              {{editForm.controls['vesselGRT'].value}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div>
+              <span>MMSI</span>
+              {{editForm.controls['vesselMMSINumber'].value}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" *ngIf="edit">
+        <button type="button" class="btn btn-default save_btn rit_align" (click)="onSave(e)">Save</button>
+        <button type="button" class="btn btn-default cancel_btn lft_align" (click)="logopen=false">Cancel</button>
+      </div>
+    </div>
+  </form>
+
+</kendo-dialog>
+<ng-template #templateName>
+    -
+</ng-template>

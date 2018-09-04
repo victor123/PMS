@@ -1,0 +1,64 @@
+<div class="box box-border clearfix">
+  <div class="box-header with-border">
+    <h4 class="box-title">Pilot User Manual Adjustment</h4>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button>
+      <button type="button" class="btn btn-box-tool" routerLink='/dashboard/'><i class="fa fa-times"></i></button>
+    </div>
+  </div>
+  <div class="box-body no-padding job-based-c-v">
+    <div class="job-based-c-v-search">
+      <form [formGroup]="filtersForm">
+        <!-- <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Current MCC Shift </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option1"> Date </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Default Days" data-mask>
+      </div> -->
+        <div class="form-group">
+          <kendo-datepicker class="form-control" formControlName="fromDate" [format]="'dd-MM-yyyy'" [min]="min" [max]="max" [(ngModel)]="data.v1" (valueChange)="startChange()" placeholder="From date"></kendo-datepicker>
+
+          <!-- <kendo-timepicker [format]="'HH:mm'" [steps]="steps" [value]="jtime" [(ngModel)]="time"></kendo-timepicker> -->
+        </div>
+        <div class="form-group " >
+          <kendo-timepicker class="form-control" formControlName="fromTime" [format]="'HH:mm'" [steps]="steps" [ngModel]="startTime" placeholder="From time"> </kendo-timepicker>
+   
+        </div>
+        <div class="form-group">
+          <kendo-datepicker class="form-control" formControlName="toDate" [format]="'dd-MM-yyyy'" [min]="min1" [max]="max1" [(ngModel)]="data.v2" placeholder="To date"></kendo-datepicker>
+
+        </div>
+        <div class="form-group ">
+          <kendo-timepicker class="form-control" formControlName="toTime" [format]="'HH:mm'" [steps]="steps" [ngModel]="endTime" placeholder="To time"> </kendo-timepicker>
+        </div>
+        <div class="form-group">
+          <button type="button" (click)="onFilter(filtersForm.value, filtersForm.valid)" class="btn btn-primary">Submit</button>
+          <button type="button" (click)="onReset()" class="btn btn-primary">Reset</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix noData-found" *ngIf="noData">
+        <strong>No data found</strong>
+    </div>
+    <kendo-chart [seriesColors]="['orange', 'blue', 'orange']">
+      <kendo-chart-legend visible="" position="bottom"></kendo-chart-legend>
+      <!-- <kendo-chart-tooltip>
+        <ng-template kendoChartSeriesTooltipTemplate let-category="category" let-value="value"> {{category}} ({{value}}%) </ng-template>
+      </kendo-chart-tooltip> -->
+      <kendo-chart-series>
+        <kendo-chart-series-item type="pie" [data]="pieData" field="per" categoryField="category">
+          <kendo-chart-series-item-labels visible="true" format="{0}%" align="center" position="outsideEnd" [content]="labelContent"></kendo-chart-series-item-labels>
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
+  </div>
+</div>

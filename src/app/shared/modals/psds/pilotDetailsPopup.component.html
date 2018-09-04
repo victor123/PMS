@@ -1,0 +1,153 @@
+<kendo-dialog class="job-view-form" *ngIf="isNew" (close)="closeForm()">
+  
+  <kendo-dialog-titlebar class="popup_header">
+    <h4>Job Details</h4> </kendo-dialog-titlebar>
+  <form novalidate [formGroup]="editForm">
+    <div class="popup_view_job_details">
+      <div class="popup_job_details">
+        <h4>Job Information</h4>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>Order Number</span>
+              <input type="text" class="k-textbox" formControlName="orderNo" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Job Type</span>
+              <input type="text" class="k-textbox" formControlName="jobType" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Priority Code</span>
+              <input type="text" class="k-textbox" formControlName="priorityCode" [readonly]="true" /> </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>Service Request Time</span>
+              <input type="text" class="k-textbox" formControlName="srt" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Confirmed Service Time</span>
+              <input type="text" class="k-textbox" formControlName="cst" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Effective CST</span>
+              <input type="text" class="k-textbox" formControlName="effectiveCST" [readonly]="true" /> </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>Planned Start Time</span>
+              <input type="text" class="k-textbox" formControlName="plannedStartTime" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Planned End Time</span>
+              <input type="text" class="k-textbox" formControlName="plannedEndTime" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx" style="width: 64%;">
+            <div> <span>Company Agent</span>
+              <input type="text" class="k-textbox" formControlName="customerName" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Agent Contact Details</span>
+              <input type="text" class="k-textbox" formControlName="contDetail" [readonly]="true" /> 
+              <!-- <textarea type="text" style="width: 100%;resize: none;" class="k-textbox"  formControlName="contDetail" [readonly]="true"></textarea> -->
+              </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Location From</span>
+              <input type="text" class="k-textbox" formControlName="locationFromCode" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Location To</span>
+              <input type="text" class="k-textbox" formControlName="locationToCode" [readonly]="true" /> </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup_job_details">
+        <h4>Job Operation Details</h4>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>Status</span>
+              <input type="text" class="k-textbox" formControlName="status" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Pilot Code</span>
+              <input type="text" class="k-textbox" formControlName="pilotCode" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Pilot License</span>
+              <input type="text" class="k-textbox" formControlName="pilotLicense" [readonly]="true" /> </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>Deployed Time</span>
+              <input type="text" class="k-textbox" formControlName="deployedTime" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Arrived Time</span>
+              <input type="text" class="k-textbox" formControlName="arrivedTime" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Onboard Time</span>
+              <input type="text" class="k-textbox" formControlName="onboardTime" [readonly]="true" /> </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>Start Time</span>
+              <input type="text" class="k-textbox" formControlName="startTime" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>End Time</span>
+              <input type="text" class="k-textbox" formControlName="endTime" [readonly]="true" /> </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx col-md-12">
+            <div> <span>Remarks</span>
+              <textarea type="text" class="k-textbox col-md-12" formControlName="remarksText" [readonly]="true"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup_job_details">
+        <h4>Vessel Information</h4>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>Vessel ID</span>
+              <input type="text" class="k-textbox" formControlName="vesselId" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Name</span>
+              <input type="text" class="k-textbox" formControlName="vesselName" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Type</span>
+              <input type="text" class="k-textbox" formControlName="vesselTypeCode" [readonly]="true" /> </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>Height</span>
+              <input type="text" class="k-textbox" formControlName="height" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Draft</span>
+              <input type="text" class="k-textbox" formControlName="draft" [readonly]="true" /> </div>
+          </div>
+          <div class="form-group text_bx">
+            <div> <span>Gross Tonnage</span>
+              <input type="text" class="k-textbox" formControlName="grossTonnage" [readonly]="true" /> </div>
+          </div>
+        </div>
+        <div class="col-md-12 col_del">
+          <div class="form-group text_bx">
+            <div> <span>MMSI</span>
+              <input type="text" class="k-textbox" formControlName="mmsi" [readonly]="true" /> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</kendo-dialog>

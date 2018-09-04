@@ -1,0 +1,110 @@
+<div class="box notification-content">
+        <!-- <h4>Pilot Default Grouping & Display Configuration </h4> -->
+        <form novalidate #myForm="ngForm">
+              <kendo-grid
+                  [data]="girdData"
+                  [pageSize]="gridState.take"
+                  [skip]="gridState.skip" 
+                  [sort]="gridState.sort"
+                  [pageable]="true"
+                  [scrollable]="'none'"
+                  (dataStateChange)="dataStateChange($event)"
+                  (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
+                  (save)="saveHandler($event)" (remove)="removeHandler($event)"
+                  (add)="addHandler($event)"
+                >
+                <ng-template kendoGridToolbarTemplate>
+                    <button kendoGridAddCommand type="button">Add new</button>
+                    <button kendoButton (click)="deleteGroup()" type="button">Delete</button>
+                </ng-template>
+                
+                <kendo-grid-column width="50">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                        <div>
+                            <input [checked]="checkNew" [(ngModel)]="dataItem.check" (change)="checkChange($event, dataItem)" kendoGridFocusable name="check" type="checkbox" />
+                        </div>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="deploymentCode" title="Deployment Code">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.deploymentCode" kendoGridFocusable name="ProductName" [disabled]="editable" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="pilotGroupName" title="Pilot Grouping">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <select [(ngModel)]="dataItem.pilotGroupName" class="form-control" name="pilotGroupName" required>
+                            <option *ngFor="let m of pilotGroupingList" value="{{m.groupCode}}">{{m.groupDescription}}</option>
+                        </select>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="defaultBaseCode" editor="string" title="Default Pilot Base">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <select [(ngModel)]="dataItem.defaultBaseCode" class="form-control" name="defaultBaseCode" required>
+                            <option *ngFor="let m of baseCodesList" value="{{m.baseCode}}">{{m.baseDescription}}</option>
+                        </select>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="pilotShiftType" editor="string" title="Shift Type">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <select [(ngModel)]="dataItem.pilotShiftType" class="form-control" name="pilotShiftType" required>
+                            <option *ngFor="let m of shiftTypeList" value="{{m.shiftName}}">{{m.shiftName}}</option>
+                        </select>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="colourName" title="Color Name">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <select [(ngModel)]="dataItem.colourCode" (change)="selectCol($event)" class="form-control" name="colorName" required>
+                            <option *ngFor="let m of colorData" value="{{m.colourCode}}">{{m.colourName}}</option>
+                        </select>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column title="Color Sample">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                        <div class="colorSample" style.background-color="rgb({{dataItem.colourCode}})"></div>
+                    </ng-template>
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <div class="colorSample" style.background-color="rgb({{dataItem.colourCode}})"></div>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="autoDeployIndicator" title="Auto Deploy Indicator" width="100">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem" let-rowIndex="rowIndex">
+                        <div> 
+                            <kendo-switch 
+                                [(ngModel)]="dataItem.autoDeployIndicator" [disabled]="true" name="autoDeployIndicator-{{rowIndex+1}}" ></kendo-switch>
+                        </div>
+                    </ng-template>
+                        <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                            <div> 
+                                <kendo-switch 
+                                [(ngModel)]="dataItem.autoDeployIndicator"  name="autoDeployIndicator" ></kendo-switch>
+                            </div> 
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-command-column title="Action" width="100">
+                    <ng-template kendoGridCellTemplate let-isNew="isNew">
+                      <button kendoGridEditCommand type="button" class="k-primary"><i class="fa fa-edit"></i></button>
+                      <button kendoGridRemoveCommand type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">
+                        <i *ngIf="!isNew" class="fa fa-paper-plane"></i>
+                        <i *ngIf="isNew" class="fa fa-paper-plane"></i>
+                        </button>
+                      <button kendoGridCancelCommand type="button">
+                        <i class="fa fa-times"></i>
+                      </button>
+                    </ng-template>
+                </kendo-grid-command-column>
+              </kendo-grid>
+          </form>
+          <kendo-dialog title="Alert" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+                <div style="width: 180px; margin: 30px auto;">
+                    <span style="float: left;"><i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i></span>
+                    <p style="padding-top: 10px; float: left;">Confirm Deletion</p>
+                </div>
+                
+                <kendo-dialog-actions>
+                    <button kendoButton (click)="close('no')">No</button>
+                    <button kendoButton (click)="close('yes')" primary="true">Yes</button>
+                </kendo-dialog-actions>
+            </kendo-dialog>
+            <div kendoDialogContainer></div>
+    </div>

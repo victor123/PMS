@@ -1,0 +1,225 @@
+<kendo-dialog class="job-view-form" *ngIf="isPsds" (close)="closeForm()">
+  <kendo-dialog-titlebar class="popup_header">
+    <h4>Job Details</h4> </kendo-dialog-titlebar>
+  <form novalidate [formGroup]="editForm">
+    <div class="popup_view_job_details tsds_view_details">
+      <div class="popup_job_details">
+        <div (click)="isOrder = !isOrder">
+          <h4>Tug Order Information</h4><span class="toggle_span"><i class="fa fa-fw fa-angle-down"></i></span>
+          <div *ngIf="isOrder">
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Order Number</span>
+                  <input type="text" class="k-textbox" formControlName="orderNumber" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Job Type</span>
+                  <input type="text" class="k-textbox" formControlName="jobType" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Priority Code</span>
+                  <input type="text" class="k-textbox" formControlName="priorityCode" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Tug Requirement</span>
+                  <input type="text" class="k-textbox" formControlName="tugRequirement" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Tug Order SRT</span>
+                  <input type="text" class="k-textbox" formControlName="tugOrderSRT" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Location From</span>
+                  <input type="text" class="k-textbox" formControlName="locationFrom" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Location To</span>
+                  <input type="text" class="k-textbox" formControlName="locationTo" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Pickup Point</span>
+                  <input type="text" class="k-textbox" formControlName="pickupPoint" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Let Go Point</span>
+                  <input type="text" class="k-textbox" formControlName="letGoPoint" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Confirmation Indicator</span>
+                  <input type="text" class="k-textbox" formControlName="confirmationIndicator" [readonly]="true" />
+                  <!-- <textarea type="text" style="width: 100%;resize: none;" class="k-textbox"  formControlName="contDetail" [readonly]="true"></textarea> -->
+                </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Container Job Indicator</span>
+                  <input type="text" class="k-textbox" formControlName="containerJobIndicator" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx" style="width: 100%;">
+                <div> <span>Tug Order Remarks</span>
+                  <textarea type="text" style="width: 100%;resize: none;" class="k-textbox" formControlName="tugOrderRemarks" [readonly]="true"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx" style="width: 100%;">
+                <div> <span>Pilot Order Remarks</span>
+                  <textarea type="text" style="width: 100%;resize: none;" class="k-textbox" formControlName="pilotOrderRemarks" [readonly]="true"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup_job_details">
+        <div (click)="isVessel = !isVessel">
+        <h4>Vessel Information</h4><span class="toggle_span"><i class="fa fa-fw fa-angle-down"></i></span>
+          <div *ngIf="isVessel">
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>ID</span>
+                  <input type="text" class="k-textbox" formControlName="vesselId" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Call Sign</span>
+                  <input type="text" class="k-textbox" formControlName="callSign" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Name</span>
+                  <input type="text" class="k-textbox" formControlName="vesselName" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Type</span>
+                  <input type="text" class="k-textbox" formControlName="vesselType" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Gross Tonnage</span>
+                  <input type="text" class="k-textbox" formControlName="grossTonnage" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>LOA</span>
+                  <input type="text" class="k-textbox" formControlName="loa" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Height</span>
+                  <input type="text" class="k-textbox" formControlName="vesselHeight" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Draft</span>
+                  <input type="text" class="k-textbox" formControlName="vesselDraft" [readonly]="true" /> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup_job_details">
+        <div (click)="isTug = !isTug">
+        <h4>Tug Job Operation Details</h4><span class="toggle_span"><i class="fa fa-fw fa-angle-down"></i></span>
+          <div *ngIf="isTug">
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Assigned Tug Number</span>
+                  <input type="text" class="k-textbox" formControlName="assignedTugNumber" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Tug Name</span>
+                  <input type="text" class="k-textbox" formControlName="tugName" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Job Duration</span>
+                  <input type="text" class="k-textbox" formControlName="jobDuration" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Status</span>
+                  <input type="text" class="k-textbox" formControlName="status" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Deployed Time</span>
+                  <input type="text" class="k-textbox" formControlName="deployedTime" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>On the Move Time</span>
+                  <input type="text" class="k-textbox" formControlName="ontheMoveTime" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Arrive Time</span>
+                  <input type="text" class="k-textbox" formControlName="arriveTime" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Start Time</span>
+                  <input type="text" class="k-textbox" formControlName="startTime" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>End Time</span>
+                  <input type="text" class="k-textbox" formControlName="endTime" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Effective SRT</span>
+                  <input type="text" class="k-textbox" formControlName="effectiveSRT" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>TONR Indicator</span>
+                  <input type="text" class="k-textbox" formControlName="tonrindicator" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Special Job Indicator</span>
+                  <input type="text" class="k-textbox" formControlName="specialJobIndicator" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Special Text Field</span>
+                  <textarea type="text" style="width: 100%;resize: none;" class="k-textbox" formControlName="specialTextField" [readonly]="true"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup_job_details">
+        <div (click)="isPilot = !isPilot">
+        <h4>Pilot Job Operation Details</h4><span class="toggle_span"><i class="fa fa-fw fa-angle-down"></i></span>
+          <div *ngIf="isPilot">
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Pilot Code</span>
+                  <input type="text" class="k-textbox" formControlName="pilotCode" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Pilot Job CST</span>
+                  <input type="text" class="k-textbox" formControlName="pilotJobCST" [readonly]="true" /> </div>
+              </div>
+              <div class="form-group text_bx">
+                <div> <span>Pilot Onboard Location</span>
+                  <input type="text" class="k-textbox" formControlName="jobDuration" [readonly]="true" /> </div>
+              </div>
+            </div>
+            <div class="col-md-12 col_del">
+              <div class="form-group text_bx">
+                <div> <span>Job Status</span>
+                  <input type="text" class="k-textbox" formControlName="jobStatus" [readonly]="true" /> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</kendo-dialog>

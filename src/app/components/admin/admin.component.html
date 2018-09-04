@@ -1,0 +1,202 @@
+<div class="content-wrapper">
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+    <div class="row">
+      <div class="col-md-12 clearfix">
+        <div class="box settings-content-outer">
+          <ul class="nav nav-tabs">
+            <li [class.active]="viewMode =='PSDS'"><a (click)="viewMode='PSDS'">PSDS</a></li>
+            <li [class.active]="viewMode =='LSDS'"><a (click)="viewMode='LSDS'">LSDS</a></li>
+            <li [class.active]="viewMode =='TSDS'"><a (click)="viewMode='TSDS'">TSDS</a></li>
+          </ul>
+          <div class="settings-content" [ngSwitch]="viewMode">
+            <div class="tab-pane active" *ngSwitchCase="'PSDS'">
+              <h5>Basic Settings</h5>
+              <kendo-panelbar>
+                <kendo-panelbar-item [title]="'Hard & Soft constraints'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <constraint-view></constraint-view>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <kendo-panelbar-item [title]="'Pilot Grouping'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <pilot-auto-deploy></pilot-auto-deploy>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <kendo-panelbar-item [title]="'Pilot Delay Code Configuration'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <delaycode-layout></delaycode-layout>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <kendo-panelbar-item [title]="'Pre Defined PONR SMS to Order Agent'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <manage-preDefine-layout></manage-preDefine-layout>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <kendo-panelbar-item [title]="'Unavailable Reason Configuration'" style="margin-bottom:0">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <unavailable-reason></unavailable-reason>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <kendo-panelbar-item [title]="'Pre defined Messages to Pilots on Shift'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="" s="box-body">
+                      <div class="table-responsive">
+                        <manage-preDefinedPilotShift-layout></manage-preDefinedPilotShift-layout>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <kendo-panelbar-item [title]="'Pilot Job Status Auto Update Configuration'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <pilot-autoUpdate></pilot-autoUpdate>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <!-- <kendo-panelbar-item [title]="'Pilot Job Estimated End Time Reminder Configuration'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div>
+                        <estimatedendtime-layout></estimatedendtime-layout>
+                      </div>
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item> -->
+                <!-- <kendo-panelbar-item [title]="'Pilot Job Sector Configuration'">
+                    <ng-template kendoPanelBarContent>
+                      <div class="box-body">
+                        <div class="table-responsive">
+                        <pilotsector-layout></pilotsector-layout>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </kendo-panelbar-item> -->
+              </kendo-panelbar>
+              <h5 class="title-mar">Advance Settings</h5>
+              <kendo-panelbar>
+                <kendo-panelbar-item [title]="'Pilot Job Service Level & Category Configuration'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <servicelevel-config></servicelevel-config>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <kendo-panelbar-item [title]="'Pilot Job Priority Configuration'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <priority-category></priority-category>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <kendo-panelbar-item [title]="'Pilot Default Sorting'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <pilotdefault-sorting></pilotdefault-sorting>
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item>
+                <!-- kendo-panelbar-item [title]="'Pilot Job Auto Deploy Configuration'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <pilot-auto-deploy></pilot-auto-deploy>
+                      </div> -->
+                <!-- /.table-responsive -->
+                <!--   </div>
+                  </ng-template>
+                </kendo-panelbar-item> -->
+                <!-- <kendo-panelbar-item [title]="'Pre-defined Message to Pilot on Shift'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <manage-preDefinedPilotShift-layout></manage-preDefinedPilotShift-layout>
+                      </div>
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item> -->
+                <!-- <kendo-panelbar-item [title]="'Pilot Job Display Configuration'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <kendo-tabstrip>
+                        <kendo-tabstrip-tab [title]="'Snapshot details'" [selected]="true">
+                          <ng-template kendoTabContent>
+                            <snapshot-layout></snapshot-layout>
+                          </ng-template>
+                        </kendo-tabstrip-tab>
+                        <kendo-tabstrip-tab [title]="'Mouse rollover details'">
+                          <ng-template kendoTabContent>
+                            <mouseOver-layout></mouseOver-layout>
+                          </ng-template>
+                        </kendo-tabstrip-tab>
+                      </kendo-tabstrip>
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item> -->
+                <!-- <kendo-panelbar-item [title]="'Pilot Special Job Category Configuration'">
+                  <ng-template kendoPanelBarContent>
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <locationgroup-config></locationgroup-config>
+                      </div>
+                    </div>
+                  </ng-template>
+                </kendo-panelbar-item> -->
+              </kendo-panelbar>
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" *ngSwitchCase="'LSDS'">
+              The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words. If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" *ngSwitchCase="'TSDS'">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </div>
+            <!-- /.tab-pane -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>

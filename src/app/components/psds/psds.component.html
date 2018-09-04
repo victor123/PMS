@@ -1,0 +1,258 @@
+<section (click)="removecontextClick($event)" (contextmenu)="removecontextClick($event)">
+  <div class="col-xs-12">
+    <div class="top-nav">
+      <div class="top-search">
+        <form method="get" id="search">
+          <input name="q" type="text" size="40" placeholder="Search vessel"> </form>
+      </div>
+      <div class="top-prev">
+        <a>
+          <i class="fa fa-fw fa-angle-left"></i>
+        </a>
+      </div>
+      <div class="top-next">
+        <a href="#">
+          <i class="fa fa-fw fa-angle-right"></i>
+        </a>
+      </div>
+      <div class="top-calendar">
+        <a >
+            <i class="fa fa-filter" (click)="fprompt=true" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="top-dropdown">
+          <div class="dropdown">
+            <select [(ngModel)]="hours" (ngModelChange)="changehours($event)">
+              <option value=8>8 Hrs</option>
+              <option value=12>12 Hrs</option>
+              <option value=18>18 Hrs</option>
+              <option value=24>24 Hrs</option>
+            </select>
+          </div>
+        </div>
+        <div class="top-dropdown">
+            <div class="dropdown">
+                <select name="status" [(ngModel)]="selectedsector" (ngModelChange)="changesector($event)">
+                  <option value="" selected>Select Sectors</option>
+                  <option *ngFor="let sector of sectors" [value]="sector.sectorCode">{{sector.sectorCode}}</option>
+                </select>
+            </div>
+          </div>
+      <div class="top-dropdown">
+        <select [(ngModel)]="mins" (ngModelChange)="changemins($event)">
+          <option value="12">5 Mins</option>
+          <option value="4">15 Mins</option>
+          <option value="2">30 Mins</option>
+          <option value="1">1 Hr</option>
+        </select>
+      </div>
+      <div class="top-dropdown">
+        <select [(ngModel)]="pasthours" (ngModelChange)="disablehours($event)">
+          <option value="true">Enable Past Hours</option>
+          <option value="false">Disable Past Hours</option>
+        </select>
+      </div>
+      <!-- Top Dropdown -->
+      <!-- Top Dropdown -->
+      <div class="top-data-icon">
+        <a>
+          <img src="assets/img/data-icon.png" width="16" height="16" alt="" (click)="refreshShedular()">
+        </a>
+      </div>
+      <!-- <label class="switch slid">
+        <label>Disable Past hours:</label>
+        <input type="checkbox" [checked]="pasthours" [(ngModel)]="pasthours" (change)="disablehours() && pasthours=!pasthours"> <span class="slider round"></span> </label> -->
+      <div class="date_time">{{startDate}} {{endDate}}</div>
+    </div>
+    <div id="scheduler" #scheduler></div>
+    <ul id="contextMenu" #contextMenu></ul>
+    <div class='agents'>
+      <div class="fuser">
+        <span class="clr_grn fuser">
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="usersearch">
+        <div class="headtitle"> Pilot
+          <button class="btn btn-primary dropdown-toggle license" type="button" data-toggle="dropdown">
+            <i class="fa fa-align-right rit_align"></i>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu license">
+            <li>
+              <a>Pilot License</a>
+              <ul>
+                <li (click)="licenseSortby('licenseCode','less')">Acending order</li>
+                <li (click)="licenseSortby('licenseCode','great')">Dcesning order</li>
+              </ul>
+            </li>
+            <li>
+              <a (click)="licenseSortby('staffRecordId')">Pilot Group</a>
+              <ul>
+                <li (click)="licenseSortby('licenseCode','less')">Acending order</li>
+                <li (click)="licenseSortby('licenseCode','great')">Dcesning order</li>
+              </ul>
+            </li>
+            <li>
+              <a (click)="licenseSortby('staffRecordId')">Pilot Sector</a>
+            </li>
+          </ul>
+        </div>
+        <div class="das_search">
+          <input type="text" (blur)="serachpilot($event)" class="das_searchTerm" placeholder="Search pilot...">
+          <button type="submit" class="das_searchButton">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+      <div id="pilotscroll" class="container-fluid" #pilot>
+        <kendo-sortable [navigatable]="true" [animation]="true" [data]="pilotsda" (dragEnd)="onDragEnd($event)" (dragStart)="onDragStart($event)"
+          oncontextmenu="return false;" class="row" itemClass="li" activeItemClass="li active">
+          <ng-template let-item="item" let-index="index">
+
+            <div (mouseleave)="removelist()">
+              <span class="clr_grn">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </span>
+
+              <span class="pilot_details nav navbar-nav" [style.background-color]="item.deploymentCode | changecolor:Pilotgroup" (dblclick)="open(item,index)"
+                (click)="onStart($event,item.text)">
+                <a class="dropdownlist">
+                  <div class="pilot_content" oncontextmenu="return false;" (contextmenu)="onrightClick($event,item)">
+                    <div class="pilot_grad">{{item.licenseCode}}</div>
+                    <div class="pilot_name">{{item.pilotCode}}
+                      <span *ngIf="item.enginePlanIndicator=='N'">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <div class="pilot_no">{{item.deploymentCode}}</div>
+                    <span class="pg_mobil"></span> .
+                  </div>
+                </a>
+                <div class="dropdown-menu" [ngClass]="{'show': item.text===currentIndex}">
+                  <div class="popdown_header">
+                    <span>{{item.text}} </span>
+                  </div>
+                  <div class="popdown_content">
+                    <div class="col-50">
+                      <label>Deployment Code</label>
+                      <label>
+                        <p>{{item.deploymentCode}}</p>
+                      </label>
+                      <label>Shift Start Base</label>
+                      <label>
+                        <p>{{item.shiftStartBase}}</p>
+                      </label>
+                      <label>Shift Start Date/Time</label>
+                      <label>
+                        <p>{{item.shiftStartDate | dateFormatPipe}}</p>
+                      </label>
+                    </div>
+                    <div class="col-50">
+                      <label>Pilot contact number</label>
+                      <label>
+                        <p>{{item.mobileNumber}}</p>
+                      </label>
+                      <label>Shift End Base</label>
+                      <label>
+                        <p>{{item.shiftEndBase }}</p>
+                      </label>
+                      <label>Shift End Date/Time</label>
+                      <label>
+                        <p>{{item.shiftEndDate | dateFormatPipe}}</p>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </ng-template>
+        </kendo-sortable>
+        <div> </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Context Menu for Pilots -->
+<div class="contextmenu" [ngStyle]="contextstyle">
+  <ul class="k-widget k-context-menu" [ngStyle]="contextmenustyle" data-role="contextmenu">
+    <li (click)="addUnavailble()">
+      <span class="k-link">Create unavailable Jobs</span>
+    </li>
+    <li *ngIf="!enableind" (click)="excludejob(true)">
+      <span class="k-link">Exclude Pilot</span>
+    </li>
+    <li *ngIf="enableind" (click)="excludejob(false)">
+      <span class="k-link">Include Pilot</span>
+    </li>
+  </ul>
+</div>
+<!-- <app-contextmenu [x]="contextmenuX" [show]="show" [y]="contextmenuY"></app-contextmenu> -->
+<!-- Piolt Details Modal -->
+
+<div class="dropdown-menus" *ngIf="plannedval !=undefined" [ngStyle]="dropdownlist">
+        <!-- <div class="popdown_header"> <span> </span> <i class="fa fa-fw fa-edit rit_align icon"></i> <i class="fa fa-fw fa-mobile rit_align icon font_18"></i> <i class="fa fa-fw fa-user rit_align icon"></i> <i class="fa fa-fw fa-user-plus rit_align icon"></i> </div> -->
+        <div class="popdown_content">
+          <div class="col-50">
+            <label>Reprogram NA Indicator</label>
+            <label>
+               <p>{{plannedval.reProgram}}</p>
+            </label>
+            <label>PSAM Tug Indicator</label>
+            <label>
+              <p>{{plannedval.tugQuantity}}</p>
+            </label>
+            <label>Location To</label>
+            <label>
+              <p>{{plannedval.locationToCode}}</p>
+            </label>
+          </div>
+          <div class="col-50">
+            <label>Vissel Arrival Confirmation</label>
+            <label>
+              <p>{{plannedval.vesselArrivalConfirmation}}</p>
+            </label>
+            <label>CST</label>
+            <label>
+               <p>{{plannedval.cst}}</p>
+            </label>
+            <label>Location To</label>
+            <label>
+               <p>{{plannedval.locationToCode}}</p>
+            </label>
+          </div>
+      </div>
+</div>
+<div id="grid" class="box box-warning unplanned-ec">
+  <div class="box-header up-header">
+    <h3 class="box-title">Unplanned Jobs</h3>
+    <span class="label label-danger unplan_no">{{datas.length}}</span>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool">
+        <div class="hide" (click)="Unplanned=false" [ngClass]="{'show': Unplanned}">
+          <i class="fa fa-minus"></i>
+        </div>
+        <div class="hide" (click)="Unplanned=true" [ngClass]="{'show': !Unplanned}">
+          <i class="fa fa-plus"></i>
+        </div>
+      </button>
+    </div>
+    <!-- /.box-tools -->
+  </div>
+  <div style="width: 100%" [ngClass]="{'show': Unplanned}" #grid class="hide"></div>
+</div>
+<ul id="gridmenu"></ul>
+<job-grid-form [model]="JobDemandModel" [isNew]="isNew" class="notime" (save)="saveHandler(event)" (cancel)="cancelHandler($event)">
+</job-grid-form>
+<app-pilot [pilotopened]="pilotopened" (close)="close()" class="notime" [pilotdetails]="pilotdetails" [operationalReadinessIndicator]="operationalReadinessIndicator"
+  [Editspecial]="Editspecial" (Pioltdatasave)="Pioltdatasave($event)" (saveList)="saveList($event)"></app-pilot>
+<app-uj [(ujopen)]="ujopen" [(ujdetials)]="ujdetials" class="notime" (ujSave)="ujSave($event)" (closee)="close()" [edit]="edit"
+  [pilotdet]="pilotdet"></app-uj>
+<relief-modal [(open)]="reopen" class="notime" [(data)]="redetials" (close)="close()" [edit]="edit"></relief-modal>
+<declareponr-modal [(open)]="deopen" class="notime" [(data)]="redetials" [(time)]="time" (close)="closeponr()" [edit]="edit"></declareponr-modal>
+<cvsm-modal [(open)]="cvopen" class="notime" [(data)]="cvdetials" (close)="close()" [edit]="edit"></cvsm-modal>
+<alert-modal [(open)]="onprompt" [status]="status" [error]="errormessage" (close)="close()"></alert-modal>
+<filter-modal [(open)]="fprompt" class="notime" [(data)]="cvdetials" (close)="close()" [edit]="edit"></filter-modal>
+
+
+

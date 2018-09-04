@@ -1,0 +1,19 @@
+
+<kendo-dialog class="erropromt" *ngIf="open" (close)="closemodal()" [minWidth]="400" [width]="500" [height]="auto">
+  <div class="alert center" *ngIf="status=='F'">
+    <div class="succent"> <i class="fa fa-exclamation-triangle succent"></i> </div> <span>
+    <div class="Success fail" *ngFor="let val of error">
+      <div class="failure" *ngFor="let data of val">{{data}}</div>
+    </div>
+    
+  </span>
+    <button (click)="closemodal()" class="btn-ok k-button k-primary ">Dismiss</button>
+  </div>
+  <div class="alert center" *ngIf="status=='S'">
+    <div class="succent succ"> <i class="fa fa-check-circle succent"></i> </div> <span>
+     
+    <div class="Success" >{{error}} </div>
+  </span>
+    <button (click)="closemodal()" class="btn-ok succ k-button k-primary">Dismiss</button>
+  </div>
+</kendo-dialog>

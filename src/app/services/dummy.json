@@ -1,0 +1,373 @@
+[
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98734",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+},
+{
+    "staffRecordId": 98028,
+    "pilotCode": "CHTOH",
+    "text": "TOH CHIN HOE FRANK",
+    "licenseCode": "C",
+    "currentSectorCode": null,
+    "mobileNumber": "98765834",
+    "emailId": null,
+    "operationalReadinessIndicator": "Y",
+    "deploymentCode": "W",
+    "shiftStartBase": "WP",
+    "shiftEndBase": "WP",
+    "shiftStartDate": "2017-11-04 20:00:00.0",
+    "shiftEndDate": "2017-11-05 05:00:00.0",
+    "userId": "ROSTER",
+    "specialJobCategories": [
+    {
+        "eligibilityId": 1,
+        "jobCategoryName": "EJS",
+        "lastServicedDate": "2017-10-08 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "A"
+    },
+    {
+        "eligibilityId": 3,
+        "jobCategoryName": "VLCC",
+        "lastServicedDate": "2017-10-01 00:00:00.0",
+        "fullEligibilityIndicator": "Y",
+        "adviceCode": "N"
+    }]
+}]

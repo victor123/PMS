@@ -1,0 +1,51 @@
+<kendo-dialog *ngIf="open" class="filter" [minWidth]="250">
+  <div class="modal-content blue_border">
+    <div class="modal-header popup_header">
+      <h4 class="modal-title">Job filter</h4>
+      <div class="popup_header_iconbx">
+          <button type="button" class="close rit_close_btn" data-dismiss="modal" (click)="closemodal()">×</button>
+        </div>
+    </div>
+    <div class="popup_pilot_timeline">
+      <div class="col-12 col-md-12 head">
+        <div class="col-4 col-md-4">
+          <input type="text" class="searchTerm form-control" placeholder="Search for Jobs">
+        </div>
+        <div class="col-4 col-md-4">
+          <select class="kendo-select" class="form-control">
+            <option value="1">unplanned</option>
+            <option value="2">planned</option>
+            <option value="3">fixed</option>
+            <option value="4">deployed</option>
+            <option value="5">arravied</option>
+            <option value="6">onboard</option>
+            <option value="7">satrted </option>
+            <option value="7">end</option>
+          </select>
+        </div>
+        <div class="col-3 col-md-3">
+          <kendo-datepicker class="form-date" [format]="'dd-MM-yyyy HH:mm'" [min]="min" [max]="max" [disabled]="false" placeholder="Planned Start Time"></kendo-datepicker>
+          <kendo-timepicker [disabled]="false" [min]="min" [steps]="{minute: 5}" [max]="max"></kendo-timepicker>
+        </div>
+      </div>
+      <kendo-grid [data]="gridData" [height]="410">
+          <kendo-grid-column field="ProductID" title="ID" width="40">
+          </kendo-grid-column>
+          <kendo-grid-column field="ProductName" title="Name" width="250">
+          </kendo-grid-column>
+          <kendo-grid-column field="Category.CategoryName" title="Category">
+          </kendo-grid-column>
+          <kendo-grid-column field="UnitPrice" title="Price" width="80">
+          </kendo-grid-column>
+          <kendo-grid-column field="UnitsInStock" title="In stock" width="80">
+          </kendo-grid-column>
+          <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                  <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+              </ng-template>
+          </kendo-grid-column>
+      </kendo-grid>
+    </div>
+  </div>
+</kendo-dialog>
+<alert-modal [(open)]="onprompt" [status]="status" [error]="errormessage" (close)="closealert()"></alert-modal>

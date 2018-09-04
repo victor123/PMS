@@ -1,0 +1,213 @@
+<div class="box notification-content">
+
+	<form novalidate #myForm="ngForm">
+		<kendo-grid [data]="manage" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [pageable]="true" [scrollable]="'none'"
+		 [sortable]="false" (dataStateChange)="onStateChange($event)" (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
+		 (save)="saveHandler($event)" (remove)="removeHandler($event)" (add)="addHandler($event)">
+
+			<ng-template kendoGridToolbarTemplate>
+				<button kendoGridAddCommand type="button">Add new</button>
+				<button kendoButton (click)="deletePreDefine()" type="button">Delete</button>
+			</ng-template>
+
+			<kendo-grid-column width="50">
+				<ng-template kendoGridCellTemplate let-dataItem="dataItem">
+					<div>
+						<input [checked]="checkNew" [(ngModel)]="dataItem.check" (change)="checkChange($event, dataItem)" kendoGridFocusable name="check"
+						 type="checkbox" />
+					</div>
+				</ng-template>
+			</kendo-grid-column>
+
+			<kendo-grid-column field="pilotSector" title="Pilot Sector">
+				<ng-template kendoGridEditTemplate let-dataItem="dataItem">
+					<input [(ngModel)]="dataItem.pilotSector" kendoGridFocusable name="pilotSector" class="k-textbox" required/>
+
+				</ng-template>
+			</kendo-grid-column>
+			<kendo-grid-column field="pilotDescription" title="Pilot Sector Description">
+				<ng-template kendoGridEditTemplate let-dataItem="dataItem">
+					<textarea #DescriptionCount [maxlength]="480" [(ngModel)]="dataItem.pilotDescription" kendoGridFocusable name="Constraints"
+					 class="k-textbox resize" required> 
+					</textarea>
+					<span class="count-text"> {{480 - DescriptionCount.value?.length}} left </span>
+				</ng-template>
+			</kendo-grid-column>
+			<kendo-grid-column field="latitudeFrom" title="Latitude From">
+				<ng-template kendoGridEditTemplate let-dataItem="dataItem">
+					<div class="form-list">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="lable-center">Latitude</label>
+								<div class="latdeg">
+									<div class="defaultLat">01</div>
+									<input [(ngModel)]="dataItem.latitudeFrom1" 
+									 maxlength="3"
+									 (keypress)="onlyNumberKey($event)"
+									 type="number" style="width:60px" 
+									 placeholder="0.0" 
+									 kendoGridFocusable 
+									 name="Details"
+									 class="k-textbox" required/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<div class="latdeg">
+									<label>Longitude</label>
+									<div class="defaultLat">103</div>
+									<input [(ngModel)]="dataItem.latitudeFrom2" 
+									placeholder="0.0" style="width:60px" 
+									(keypress)="onlyNumberKey($event)"
+									type="number" 
+									maxlength="3"
+									kendoGridFocusable 
+									name="quality"
+									class="k-textbox" required/>
+								</div>
+							</div>
+						</div>
+						<span class="errorbox" *ngIf="dataItem.latitudeFrom1 >= dataItem.latitudeFrom2">longitude shouldn't be lessthan to lattitude </span>
+					</div>
+				</ng-template>
+			</kendo-grid-column>
+			<kendo-grid-column field="latitudeTo" title="Latitude To">
+				<ng-template kendoGridEditTemplate let-dataItem="dataItem">
+					<div class="form-list">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="lable-center">Latitude</label>
+								<div class="latdeg">
+									<div class="defaultLat">01</div>
+									<input [(ngModel)]="dataItem.latitudeFrom1" style="width:60px" 
+									placeholder="0.0" 
+									kendoGridFocusable 
+									name="latitudeTo" 
+									class="k-textbox"
+									 required/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<div class="latdeg">
+									<label>Longitude</label>
+									<div class="defaultLat">103</div>
+									<input [(ngModel)]="dataItem.latitudeFrom12" 
+									placeholder="0.0" style="width:60px" 
+									kendoGridFocusable 
+									name="latitudeTo" 
+									class="k-textbox"
+									required/>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</ng-template>
+			</kendo-grid-column>
+			<kendo-grid-column field="longitudeFrom" title="Longitude From">
+				<ng-template kendoGridEditTemplate let-dataItem="dataItem">
+					<div class="form-list">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="lable-center">Latitude</label>
+								<div class="latdeg">
+									<div class="defaultLat">01</div>
+									<input [(ngModel)]="dataItem.latitudeFrom1" style="width:60px" 
+									placeholder="0.0" 
+									kendoGridFocusable 
+									name="longitudeFrom"
+									class="k-textbox" required/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<div class="latdeg">
+									<label>Longitude</label>
+									<div class="defaultLat">103</div>
+									<input [(ngModel)]="dataItem.latitudeFrom2" 
+									placeholder="0.0" style="width:60px" 
+									kendoGridFocusable name="longitudeFrom"
+									class="k-textbox" required/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</kendo-grid-column>
+			<kendo-grid-column field="longitudeTo" title="Longitude To">
+				<ng-template kendoGridEditTemplate let-dataItem="dataItem">
+					<div class="form-list">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="lable-center">Latitude</label>
+								<div class="latdeg">
+									<div class="defaultLat">01</div>
+									<input [(ngModel)]="dataItem.latitudeFrom1" style="width:60px" 
+									placeholder="0.0" 
+									kendoGridFocusable 
+									name="longitudeTo" 
+									class="k-textbox"
+									 required/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<div class="latdeg">
+									<label>Longitude</label>
+									<div class="defaultLat">103</div>
+									<input [(ngModel)]="dataItem.latitudeFrom2" 
+									placeholder="0.0" style="width:60px" 
+									kendoGridFocusable 
+									name="longitudeTo" 
+									class="k-textbox"
+									 required/>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</kendo-grid-column>
+			<kendo-grid-column field="locationTo" title="Location To">
+				<ng-template kendoGridEditTemplate let-dataItem="dataItem">
+					<input [(ngModel)]="dataItem.locationTo" kendoGridFocusable name="locationTo" class="k-textbox" required/>
+				</ng-template>
+			</kendo-grid-column>
+			<kendo-grid-command-column title="Action" width="100">
+				<ng-template kendoGridCellTemplate let-isNew="isNew">
+					<button kendoGridEditCommand type="button" class="k-primary">
+						<i class="fa fa-edit"></i>
+					</button>
+					<button kendoGridRemoveCommand type="button">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+					<button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">
+						<i *ngIf="!isNew" class="fa fa-paper-plane"></i>
+						<i *ngIf="isNew" class="fa fa-paper-plane"></i>
+					</button>
+					<button kendoGridCancelCommand type="button">
+						<i class="fa fa-times"></i>
+					</button>
+				</ng-template>
+			</kendo-grid-command-column>
+		</kendo-grid>
+	</form>
+	<kendo-dialog title="Alert" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+		<div style="width: 180px; margin: 30px auto;">
+			<span style="float: left;">
+				<i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
+			</span>
+			<p style="padding-top: 10px; float: left;">Confirm Deletion</p>
+		</div>
+		<kendo-dialog-actions>
+			<button kendoButton (click)="close('no')">No</button>
+			<button kendoButton (click)="close('yes')" primary="true">Yes</button>
+		</kendo-dialog-actions>
+	</kendo-dialog>
+	<div kendoDialogContainer></div>
+</div>

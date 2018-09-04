@@ -1,0 +1,67 @@
+<div class="box box-border clearfix">
+  <div class="box-header with-border">
+    <h4 class="box-title">Tug Supply vs Job Demand Chart</h4>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse">
+        <i class="fa fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-box-tool" routerLink= '/dashboard/'>
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="box-body no-padding job-based-c-v">
+	<div class="job-based-c-v-search">
+      <form [formGroup]="filterForm">
+      <div class="form-group " [ngClass]="{'has-error':!filterForm.controls['date'].valid && filterForm.controls['date'].touched}">
+        <kendo-datepicker class="form-control" 
+        formControlName="date" 
+        [format]="'dd-MM-yyyy'" 
+        [value]="jdate" 
+        [(ngModel)]="jdate"
+        placeholder="From date">
+        </kendo-datepicker>
+        <div style="color: red; font-size: 10px;"  *ngIf="filterForm.controls['date'].hasError('required') && filterForm.controls['date'].touched">Date Required</div>
+      </div>
+      <div class="form-group " [ngClass]="{'has-error':!filterForm.controls['time'].valid && filterForm.controls['time'].touched}">
+        <kendo-timepicker class="form-control" 
+        formControlName="time" 
+        [format]="'HH:mm'" 
+        [steps]="steps" 
+        [value]="jtime" 
+        [(ngModel)]="jtime"
+        placeholder="From Time">
+        </kendo-timepicker>
+        <div style="color: red; font-size: 10px;"  *ngIf="filterForm.controls['time'].hasError('required') && filterForm.controls['time'].touched">Time Required</div>
+      </div>
+      <div class="form-group " [ngClass]="{'has-error':!filterForm.controls['hours'].valid && filterForm.controls['hours'].touched}">
+        <select class="form-control" formControlName="hours">
+            <option *ngFor="let m of listItems" [value]="m.value">{{m.text}}</option>
+          </select>
+        <!-- <kendo-dropdownlist class="form-control" 
+        formControlName="hours" 
+        [data]="jhourslist" 
+        [value]="jhours"
+        [(ngModel)]="filterForm['hours']">
+        </kendo-dropdownlist> -->
+        <div style="color: red; font-size: 10px;"  *ngIf="filterForm.controls['hours'].hasError('required') && filterForm.controls['hours'].touched">Hours Required</div>
+      </div>
+      <div class="form-group ">
+        <button type="button" [disabled]="!filterForm.valid" (click)="submitFilter(filterForm.value)" class="btn btn-primary">Submit</button>
+        <button type="button" (click)="onReset()" class="btn btn-primary">Reset</button>
+      </div>
+      </form>
+    </div>
+    <div >
+	    <kendo-chart [categoryAxis]="{ min: 0, max: 20, labels: {rotation: 'auto'}, categories: axisData }" [pannable]="{lock: 'y'}" [zoomable]="{mousewheel: {lock: 'y'},selection: {lock: 'y'}}" legend="visible: true" >
+	      <kendo-chart-legend visible="true" position="bottom" orientation="horizontal" 
+	      ></kendo-chart-legend>
+	      <kendo-chart-tooltip format="{0}"></kendo-chart-tooltip>
+	      <kendo-chart-series>
+	        <kendo-chart-series-item *ngFor="let item of series; let i = index" type="line" [data]="item.data" [name]="item.name">
+	        </kendo-chart-series-item>
+	      </kendo-chart-series>
+	    </kendo-chart>
+	</div>
+  </div>
+</div>

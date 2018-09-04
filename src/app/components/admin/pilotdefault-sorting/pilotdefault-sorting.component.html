@@ -1,0 +1,94 @@
+<div class="box notification-content">
+  <form #myform = "ngForm" novalidate>
+    <div class="k-gridCustom">
+  <button kendoButton (click)="editContainer($event)" type="button">Edit</button>
+  <div  class="visableButton"  *ngIf="updateCancelButton">
+  <button kendoButton #inActive [disabled] = "myform.invalid" (click)="saveHandler($event, delay)" type="button">Save</button>
+  <button kendoButton (click)="cancel($event)" type="button">Cancel</button>
+</div></div>
+  <table class="table customTable">
+    <thead>
+      <tr>
+          <th style="width:200px"> Enable Indicator</th>
+          <th width="100">Sorting preference</th>
+        <th style="width:200px">Field Name</th>
+                
+        <th  style="width:180px">Sub-sorting Criteria </th>
+        <th>Ordering</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dataItem of delay; let i = index">
+          <td>
+            <!-- <div *ngIf="kendoGridData"> {{ dataItem.enableIndicator ? 'ON' : 'No' }} </div> -->
+              <div >
+                <!-- <kendo-switch (click)="onChangeCheck($event, dataItem)"
+                [(ngModel)]="dataItem.enableIndicator" 
+                name="enableIndicator-{{i}}">
+              </kendo-switch> -->
+              <kendo-switch (click)="onChangeCheck($event, dataItem)" [disabled]="checkSwitch"
+               [(ngModel)]="dataItem.enableIndicator"  name="enableIndicator-{{i}}" ></kendo-switch>
+              </div>
+            </td>
+            <td > 
+                <div  *ngIf="kendoGridData" > {{dataItem.sequenceNumber}} </div>
+                <div *ngIf="kendoGridEditTemplate">
+                  <select [(ngModel)]="dataItem.sequenceNumber" style="width:80px"
+                  name="sequenceNumber-{{i}}"
+                  (change)="filterContent($event, i, delay)"
+                   class="form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+                  <!-- <div *ngIf="dataItem.errorbox"> Dupicate  </div> -->
+                </div>
+              </td>
+       
+            <td>
+          {{dataItem.fieldName.replace('_',' ')}}
+        </td>
+    
+        <td>
+            <div *ngIf="kendoGridData && dataItem.subSortingCriteriaList!= 'null'"> {{dataItem.subSortingCriteriaList}} </div>
+              <div *ngIf="kendoGridEditTemplate">
+              <kendo-sortable style="width:100%"
+              *ngIf="dataItem.subSortingCriteriaList != 'null'"
+               [navigatable]="true"
+               [animation]="true" 
+               [data]="dataItem.subSortingCriteriaList" 
+               class="row"
+                itemClass="item" activeItemClass="item active">
+              </kendo-sortable>
+            </div>
+          </td>
+        <td style="width:100px" >
+          <div *ngIf="kendoGridData && dataItem.orderingTypeCode != 'null'" > {{dataItem.orderingTypeCode}} </div>
+          <div *ngIf="kendoGridEditTemplate">
+            <select style="width:100px" [disabled]="dataItem.orderingTypeCode == 'null'"  [(ngModel)]="dataItem.orderingTypeCode" class="form-control" name="orderingTypeCode-{{i}}">
+              <option value="ASC">ASC</option>
+              <option value="DESC">DESC</option>
+            </select>
+          </div>
+        </td>
+   
+    
+      </tr>
+    </tbody>
+  </table>
+</form>
+<kendo-dialog title="Alert" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+    <div style="width: 180px; margin: 30px auto;">
+        <span style="float: left;"><i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i></span>
+        <p style="padding-top: 10px; float: left;">Confirm Deletion</p>
+    </div>
+    
+    <kendo-dialog-actions>
+        <button kendoButton (click)="close('no')">No</button>
+        <button kendoButton (click)="close('yes')" primary="true">Yes</button>
+    </kendo-dialog-actions>
+</kendo-dialog>
+<div kendoDialogContainer></div>
+</div>
+

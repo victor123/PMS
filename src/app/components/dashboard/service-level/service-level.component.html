@@ -1,0 +1,110 @@
+<div class="box box-border clearfix">
+  <div class="box-header with-border">
+    <h4 class="box-title">Service Level Requirement</h4>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-box-tool" routerLink= '/dashboard/'><i class="fa fa-times"></i></button>
+    </div>
+  </div>
+  <div class="box-body no-padding job-based-c-v">
+    <div class="job-based-c-v-search">
+      <form [formGroup]="filterForm">
+        <!-- <div class="form-group">
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Current MCC Shift </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option1"> Date </label>
+          </div>
+        </div> -->
+        <div class="form-group" >
+          <kendo-datepicker class="form-control" 
+          formControlName="startDate" 
+          [(value)]="startDate" 
+          [format]="'dd-MM-yyyy'" 
+          [(ngModel)]="startDate" 
+          [min]="min" [max]="max"
+          (valueChange)="startChange()"
+          placeholder="Start Date"></kendo-datepicker>
+     
+        </div>
+        <div class="form-group ">
+          <kendo-timepicker class="form-control" 
+          formControlName="startTime" 
+          [format]="'HH:mm'" 
+          [steps]="steps" 
+          [value]="startTime" 
+          [(ngModel)]="startTime"
+           placeholder="Start time">
+
+          </kendo-timepicker>
+   </div>
+        <div class="form-group">
+          <kendo-datepicker class="form-control" 
+          formControlName="endDate" 
+          [(value)]="endDate" 
+          [format]="'dd-MM-yyyy'" 
+          [(ngModel)]="endDate" 
+          [min]="min1" [max]="max1"
+          placeholder="End Date"></kendo-datepicker>
+
+        </div>
+        <div class="form-group " >
+          <kendo-timepicker class="form-control" 
+          formControlName="endTime" 
+          [format]="'HH:mm'" 
+          [steps]="steps" 
+          [value]="endTime" 
+          [(ngModel)]="endTime"
+           placeholder="End time">
+
+          </kendo-timepicker>
+   
+        </div>
+        <div class="form-group">
+          <button type="button" (click)="onFilter(filterForm.value)" class="btn btn-primary">Submit</button>
+          <button type="button" (click)="onReset()" class="btn btn-primary">Reset</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div >
+    <kendo-grid 
+    	[data]="gridDataa" 
+    	[scrollable]="'none'"
+      class="kendo_cell"
+        >
+       	<kendo-grid-column field="serviceLevelCategory" title="">
+       		<ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex" >
+              <span class="serviceCategory">{{dataItem.serviceLevelCategory}}</span>
+            </ng-template>
+       	</kendo-grid-column>
+       	<kendo-grid-column field="efficiency1" title="BST = FSRT " width="200">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex" >
+                    <span [ngClass]="{'red': dataItem.requiredServiceLevelefficiency1 == 'Not achieved', 'black': dataItem.requiredServiceLevelefficiency1 == 'Achieved', 'none': dataItem.efficiency1=='NA', 'none1': dataItem.efficiency1=='-'}" >{{dataItem.efficiency1}}</span>
+            </ng-template>
+        </kendo-grid-column>
+       	<kendo-grid-column field="efficiency2" title="BST = FSRT + 15 mins"  width="200">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span [ngClass]="{'red': dataItem.requiredServiceLevelefficiency2 == 'Not achieved', 'black': dataItem.requiredServiceLevelefficiency2 == 'Achieved', 'none': dataItem.efficiency2=='NA', 'none1': dataItem.efficiency2=='-'}" >{{dataItem.efficiency2}}</span>
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="efficiency3" title="BST = FSRT + 30 mins"  width="200">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span [ngClass]="{'red': dataItem.requiredServiceLevelefficiency3 == 'Not achieved', 'black': dataItem.requiredServiceLevelefficiency3 == 'Achieved', 'none': dataItem.efficiency3=='NA', 'none1': dataItem.efficiency3=='-'}" >{{dataItem.efficiency3}}</span>
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="efficiency4" title="BST = FSRT + 180 mins"  width="200">
+          <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span [ngClass]="{'red': dataItem.requiredServiceLevelefficiency4 == 'Not achieved', 'black': dataItem.requiredServiceLevelefficiency4 == 'Achieved', 'none': dataItem.efficiency4=='NA', 'none1': dataItem.efficiency4=='-'}" >{{dataItem.efficiency4}}</span>
+            </ng-template>
+        </kendo-grid-column>
+    </kendo-grid>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,211 @@
+<kendo-dialog *ngIf="pilotopened" [minWidth]="250" [width]="850">
+  <div class="modal-content blue_border">
+    <div class="modal-header popup_header">
+      <h4 class="modal-title">Pilot Resource Detail </h4>
+      <div class="popup_header_iconbx">
+        <button type="button" class="close rit_close_btn" (click)="closepilot()">×</button>
+        <a href="#" class="pop_icon">
+          <img src="assets/img/icon-fish.png" width="24" height="12" alt="">
+        </a>
+        <a href="#" class="pop_icon">
+          <img src="assets/img/icon-edit.png" width="16" height="15" alt="">
+        </a>
+        <a href="#" class="pop_icon">
+          <img src="assets/img/icon-per.png" width="16" height="17" alt="">
+        </a>
+        <a class="pop_icon">
+          <img src="assets/img/icon-mobile.png" width="11" height="16" alt="">
+        </a>
+      </div>
+    </div>
+    <!-- icon header -->
+    <div class="popup_pilot_timeline">
+      <!-- Pilot Timeline -->
+      <div class="top_timeline" data-toggle="collapse" data-target="#demo">
+        <h3>Pilot Timeline</h3>
+        <i class="fa fa-fw fa-angle-down"></i>
+        <span>Unavailable Slots: {{pilotdetails.pilotJobDetails[1].length}}</span>
+        <span>Completed: {{pilotdetails.pilotJobDetails[0].length}}</span>
+      </div>
+      <div class="pop_table collapse" id="demo">
+        <!-- Pop Table -->
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Start Time</th>
+              <th>Start Time</th>
+              <th>Status</th>
+              <th>Remarks</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pilots of pilotdetails.pilotJobDetails[0]">
+              <td>Job</td>
+              <td>{{pilots.startTime | dateFormatPipe}}</td>
+              <td>{{pilots.endTime | dateFormatPipe}}</td>
+              <td>{{pilots.status}}</td>
+              <td>{{pilots.remarks}}</td>
+              <td></td>
+            </tr>
+            <tr *ngFor="let pilots of pilotdetails.pilotJobDetails[1]">
+              <td>Unavailable (west)</td>
+              <td>{{pilots.startTime | dateFormatPipe}}</td>
+              <td>{{pilots.endTime | dateFormatPipe}}</td>
+              <td>{{pilots.status}}</td>
+              <td>{{pilots.remarks}}</td>
+              <td>
+                <div class="icon_lay">
+                  <div class="icon">
+                    <a (click)="deleteun(pilots)">
+                      <img src="assets/img/tab_icon_delete.png" width="9" height="12" alt="">
+                    </a>
+                  </div>
+                  <div class="icon">
+                    <a (click)="openuj(pilots)">
+                      <img src="assets/img/tab_icon_edit.png" width="12" height="12" alt="">
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Pop Table -->
+      <div class="col-6 col-md-4 col_del">
+        <div class="text_bx">
+          <span>Pilot Code</span>
+          <label>{{pilotdetails.pilotCode}}</label>
+        </div>
+        <div class="text_bx">
+          <span>Pilot Start Base </span>
+          <label>{{pilotdetails.shiftStartBase}}</label>
+        </div>
+        <div class="text_bx">
+          <span>Current Sector</span>
+          <label>{{pilotdetails.currentSectorCode}}</label>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col_del">
+        <div class="text_bx">
+          <span>Pilot License</span>
+          <label>{{pilotdetails.licenseCode}}</label>
+        </div>
+        <div class="text_bx pilot_end">
+          <span>Pilot End Base </span>
+          <select name="status" class="form-control" [(ngModel)]="pilotdetails.shiftEndBase">
+            <option *ngFor="let base of basedetails" [value]="base.baseCode">{{base.baseCode}}</option>
+          </select>
+        </div>
+        <div class="text_bx">
+          <span>Shift Start Time</span>
+          <label>{{pilotdetails.shiftStartDate | dateFormatPipe}}</label>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col_del">
+        <div class="text_bx">
+          <span>Operational Readiness </span>
+          <label class="switch slid">
+            <label></label>
+            <input type="checkbox" [(ngModel)]="pilotdetails.operationalReadinessIndicator" [(ngModel)]="pasthours">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="text_bx">
+          <span>Deployment Code </span>
+          <label>{{pilotdetails.deploymentCode}}</label>
+        </div>
+        <div class="text_bx modtime">
+          <span>Shift End Time</span>
+          <kendo-datepicker [(ngModel)]="pilotdetails.shiftEndDate" [format]="'dd-MM-yyyy'" [value]="pilotdetails.shiftEndDate"></kendo-datepicker>
+          <kendo-timepicker [(ngModel)]="pilotdetails.shiftEndDate" [value]="pilotdetails.shiftEndDate" [format]="'HH:mm'" [steps]="steps"></kendo-timepicker>
+        </div>
+      </div>
+      <div class="jobs_eligibility_list">
+        <div class="title">List of Special Jobs Eligibility </div>
+      </div>
+      <div class="jobs_eligibility">
+        <!-- Eligibility Table -->
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Job Category</th>
+              <th>Last Date/Time of Service</th>
+              <th>Eligible</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="pilotdetails.specialJobCategories.length>0">
+            <tr *ngFor="let jobs of pilotdetails.specialJobCategories">
+              <td>{{jobs.jobCategoryName}}</td>
+              <td *ngIf="Editspecial==jobs.eligibilityId">
+                <kendo-datepicker [(ngModel)]="jobs.lastServicedDate" [format]="'dd-MM-yyyy'"></kendo-datepicker>
+                <kendo-timepicker [(ngModel)]="jobs.lastServicedDate" [format]="'HH:mm'" [steps]="steps"></kendo-timepicker>
+              </td>
+              <td *ngIf="Editspecial!==jobs.eligibilityId">{{jobs.lastServicedDate | dateFormatPipe}}</td>
+              <td>{{jobs.eligibilityId}}</td>
+              <td>
+                <a *ngIf="Editspecial!==jobs.eligibilityId" (click)="Editspecial=jobs.eligibilityId;valid=true" class="icon">
+                  <img src="assets/img/tab_icon_edit.png" width="12" height="12" alt="">
+                </a>
+                <a *ngIf="Editspecial!==jobs.eligibilityId" class="icon">
+                  <img src="assets/img/tab_icon_delete.png" width="9" height="12" alt="">
+                </a>
+                <a *ngIf="Editspecial==jobs.eligibilityId" (click)="saveData(jobs)" class="icon">Save</a>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="pilotdetails.specialJobCategories.length<=0">
+            <div class="nospecial">No Special Job Categories</div>
+          </tbody>
+        </table>
+      </div>
+      <!-- Eligibility Table -->
+      <div class="col-6 col-md-4 col_del col_top_0">
+        <div class="text_bx">
+          <span>Pilot contact number</span>
+          <label>{{pilotdetails.mobileNumber}}</label>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col_del col_top_0">
+        <div class="text_bx">
+          <span>Pilot Email ID</span>
+          <label>acerbain@gmail.com</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default save_btn rit_align" [disabled]="valid"  (click)="sPioltdaa($event);valid=false">Save</button>
+      <button type="button" class="btn btn-default cancel_btn lft_align">Cancel</button>
+    </div>
+  </div>
+</kendo-dialog>
+<kendo-dialog *ngIf="pioltdata" [minWidth]="250" [width]="650">
+  <div class="modal-content blue_border  unavail_slot">
+    <div class="modal-header popup_header">
+      <!-- icon header -->
+      <h4 class="modal-title">Edit Unavailable Slot</h4>
+      <div class="popup_header_iconbx">
+        <button type="button" class="close rit_close_btn" (click)="closeDelete()">×</button>
+      </div>
+    </div>
+    <div class="popup_create_unavail_slot">
+      <!-- View Job Details -->
+      <div class="popup_create_slot">
+        <div class="text_bx_btm">
+          <label>Remarks</label>
+          <textarea [(ngModel)]="pioltdata.remarks">Detailed reason for deleting unavailable slot</textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default save_btn rit_align" (click)="deleteuns()">Update</button>
+        <button type="button" class="btn btn-default cancel_btn lft_align" (click)="logopen=false">Cancel</button>
+      </div>
+    </div>
+  </div>
+</kendo-dialog>
+<app-uj [(ujopen)]="ujopen" [(ujdetials)]="ujdetials" class="notime" (ujSave)="ujSave($event)" (closee)="close()" [edit]="ujEdit"
+[pilotdet]="pilotdet"></app-uj>
